@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # coding: utf-8
+#encoding: utf-8
 require "rubygems"
 require "sinatra/base"
 require 'yaml/store'
@@ -9,6 +10,7 @@ require 'securerandom'
 require 'sinatra/form_helpers'
 require 'mail'
 require 'erb'
+require 'spork'
 
 class Buchungsportal < Sinatra::Base
 
@@ -144,37 +146,41 @@ class Buchungsportal < Sinatra::Base
   end
 
   post '/success' do
-    @params = params.to_h
-    @mail = params["mail"]
-    @store = YAML::Store.new 'spots.yml'
-    @session_id = params['sessionID']
-    @company = params["company"]
-    @oldParticipants = @store.transaction { @store['participants'] }.nil? ? Participants : @store.transaction { @store['participants'] }
-    @store.transaction do
-      @store['participants'] ||= @oldSpots
-      @store['participants'][@session_id] = @company
-    end
-    user = ENV['MAILUSER']
-    pass = ENV['MAILPASSWORD']
-    mail = ERB.new(File.read('./views/mail.erb').force_encoding("UTF-8")).result(binding)
-    options = { 
-      :address              => "mail.th-brandenburg.de",
-      :port                 => 25,
-      :user_name            => user,
-      :password             => pass,
-      :authentication       => 'plain',
-      :enable_starttls_auto => true  }
-    # Set mail defaults
-    Mail.defaults do
-      delivery_method :smtp, options
-    end
-    Mail.deliver do
-      to "#{@mail}"
-      bcc "#{ENV['MAIL1']}"
-      from "#{ENV['MAIL2']}"
-      subject "Buchungsbestätigung Firmenkontaktmesse 2019"
-      content_type 'text/html; charset=UTF-8'
-      body "#{mail}"
+    @recipient = params["mail"]
+    Spork.prefork do  
+      @params = params.to_h
+      @mails = ["#{@recipient}","#{ENV['MAIL1']}"]
+      @store = YAML::Store.new 'spots.yml'
+      @session_id = params['sessionID']
+      @company = params["company"]
+      @oldParticipants = @store.transaction { @store['participants'] }.nil? ? Participants : @store.transaction { @store['participants'] }
+      @store.transaction do
+        @store['participants'] ||= @oldSpots
+        @store['participants'][@session_id] = @company
+      end
+      user = ENV['MAILUSER']
+      pass = ENV['MAILPASSWORD']
+      mail = ERB.new(File.read('./views/mail.erb').force_encoding("UTF-8")).result(binding)
+      options = { 
+        :address              => "mail.th-brandenburg.de",
+        :port                 => 25,
+        :user_name            => user,
+        :password             => pass,
+        :authentication       => 'plain',
+        :enable_starttls_auto => true  }
+      # Set mail defaults
+      Mail.defaults do
+        delivery_method :smtp, options
+      end
+      @mails.each do |m|
+        Mail.deliver do
+          to "#{m}"
+          from "#{ENV['MAIL2']}"
+          subject "Buchungsbestätigung Firmenkontaktmesse 2019"
+          content_type 'text/html; charset=UTF-8'
+          body "#{mail}"
+        end
+      end 
     end
     erb :success
   end
