@@ -169,8 +169,8 @@ class Buchungsportal < Sinatra::Base
     end
     Mail.deliver do
       to "#{@mail}"
-      bcc "schwarz@posteo.de"
-      from "fkm@th-brandenburg.de"
+      bcc "#{ENV['MAIL1']}"
+      from "#{ENV['MAIL2']}"
       subject "Buchungsbestätigung Firmenkontaktmesse 2019"
       content_type 'text/html; charset=UTF-8'
       body "#{mail}"
@@ -183,7 +183,7 @@ class Buchungsportal < Sinatra::Base
   end
 
   post '/backend' do
-    if params["inputEmail"] == ENV[USERNAME] && params["inputPassword"] == ENV[PASSWORD]
+    if params["inputEmail"] == ENV['USERNAME'] && params["inputPassword"] == ENV['PASSWORD']
       @store = YAML::Store.new 'spots.yml'
       @participants = @store.transaction { @store['participants'] }
       @spots = @store.transaction { @store['spots'] }
