@@ -2,7 +2,7 @@
 # note the trailing slash in this example
 @dir = "/home/buchungsportal/Buchungsportal/"
 
-worker_processes 4
+worker_processes 8
 working_directory @dir
 
 timeout 30

@@ -15,6 +15,7 @@ class Buchungsportal < Sinatra::Base
   helpers Sinatra::FormHelpers
   enable :sessions
   register Sinatra::Flash
+  set :protection, :except => :frame_options
 
   Spots = {
     '1' => 'c',
