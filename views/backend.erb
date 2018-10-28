@@ -16,10 +16,12 @@
           <%= "<td>#{v.nil? ? "ohne" : v}</th>" %>
           <%= "<td>" %>
           <%= "<form method='post' action='/backend'>" %>
+              <%= %Q(<input type="text" class="form-control" id="inputEmail" name='inputEmail' value="#{params["inputEmail"]}"hidden>) %>
+              <%= %Q(<input type="text" class="form-control" id="inputPassword" name='inputPassword' value="#{params["inputPassword"]}"hidden>) %>
               <%= %Q(<button class="btn btn-danger" type="submit" name='deleteUser' value="">Löschen</button>) %>
-              <%= params.map{|key, value| %Q(<input type="text" class="form-control" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
               <%= %Q(<input type="text" class="form-control" id="spotID" name="spotID" value="#{v}" hidden>) %>
               <%= %Q(<input type="text" class="form-control" id="userID" name="userID" value="#{@spots[v]}" hidden>) %>
+              <%= %Q(<input type="text" class="form-control" id="userKey" name="userKey" value="#{k}" hidden>) %>
           <%= "</form>" %>
           <%= "</td>" %>
         </tr>

@@ -196,9 +196,15 @@ class Buchungsportal < Sinatra::Base
       @spots = @store.transaction { @store['spots'] }
       if (!params["deleteUser"].nil?)
         @spots.delete(params["spotID"])
+        if params["userID"].empty?
+          puts "ÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜÜ"
+          @participants.delete(@participants.key(params["userKey"]))
+        else
+          @participants.delete(params["userID"])
+        end
         @participants.delete(params["userID"])
         @store.transaction do
-          @store['spots'][params["spotID"]] = Spots[params["spotID"]]
+          @store['spots'][params["spotID"]] = Spots[params["spotID"]] if  (!params["spotID"].empty?)
           @store['participants'] = @participants
         end
       end
@@ -208,7 +214,7 @@ class Buchungsportal < Sinatra::Base
         spot = @spots.select {|ks,vs| vs == k}
         @user["users"][@participants[k]] = spot.keys[0]
       end
-      puts @user
+      puts params.inspect
       erb :backend
     else
       flash[:error] = "E-Mail-Adresse oder Password Falsch."
