@@ -1,0 +1,209 @@
+<div class="container">
+    <form action='validate_step_four' method='post' class="needs-validation" novalidate>
+        <legend class="medium">
+            Angaben zur Firma
+            <small class="tiny">(*=Pflichtfeld)</small>
+        </legend>
+        <hr>
+        <div class="form-group row">
+            <label for="company" class="col-sm-3 col-form-label small">Unternehmen*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="company" id="company" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben Sie einen Unternehmensnamen an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="street" class="col-sm-3 col-form-label small">Straße / Nr*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="street" id="street" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben Straße und Nr an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="zip" class="col-sm-3 col-form-label small">PLZ*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="zip" id="zip" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben Ihre PLZ an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="city" class="col-sm-3 col-form-label small">Ort*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="city" id="city" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben einen Ort an.
+                </div>
+            </div>
+        </div>
+        <legend class="medium">
+            Ansprechpartner
+            <small class="tiny">(*=Pflichtfeld)</small>
+        </legend>
+        <hr>
+        <div class="form-group row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="gender" value="m">
+                    <label class="form-check-label" for="gender">Herr</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="gender" value="w">
+                    <label class="form-check-label" for="gender">Frau</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="title" class="col-sm-3 col-form-label small">Titel</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="title" id="title">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="fname" class="col-sm-3 col-form-label small">Vorname*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="fname" id="fname" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben einen Vornamen an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lname" class="col-sm-3 col-form-label small">Nachname*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="lname" id="lname" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben einen Nachnamen an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="department" class="col-sm-3 col-form-label small">Abteilung</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="department" id="department">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="phone" class="col-sm-3 col-form-label small">Telefon*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="phone" id="phone" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben Sie eine Telefonnummer an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="fax" class="col-sm-3 col-form-label small">Fax</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="fax" id="fax">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mail" class="col-sm-3 col-form-label small">E-Mail-Adresse*</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control form-control-sm" name="mail" id="mail" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben Sie eine E-Mail-Adresse an.
+                </div>
+            </div>
+        </div>
+        <legend class="medium">
+            Unternehmensvertreter vor Ort
+            <small class="tiny">(*=Pflichtfeld)</small>
+        </legend>
+        <hr>
+        <div class="form-group row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ugender" id="ugender" value="m">
+                    <label class="form-check-label" for="ugender">Herr</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ugender" id="ugender" value="w">
+                    <label class="form-check-label" for="ugender">Frau</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="utitle" class="col-sm-3 col-form-label small">Titel</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="utitle" id="utitle">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ufname" class="col-sm-3 col-form-label small">Vorname*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="ufname" id="ufname" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben einen Vornamen an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ulname" class="col-sm-3 col-form-label small">Nachname*</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control form-control-sm" name="ulname" id="ulname" required>
+                <div class="valid-feedback">
+                    🗸
+                </div>
+                <div class="invalid-feedback">
+                    Bitte geben einen Nachnamen an.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputState" class="col-sm-3 col-form-label small">Anzahl vor Ort</label>
+            <div class="col-sm-9">    
+                <select id="anz" name="anz" class="form-control form-control-sm">
+                    <option name="anz" id="anz" value="1" selected>1</option>
+                    <option name="anz" id="anz" value="2">2</option>
+                    <option name="anz" id="anz" value="3">3</option>
+                    <option name="anz" id="anz" value="4">4</option>
+                    <option name="anz" id="anz" value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <div class="col-sm-10">
+            <input class="btn btn-danger" type="button" onclick="history.back();" value="Zurück">
+            <button type="submit" class="btn btn-primary">Weiter</button>
+            </div>
+        </div>
+        <%= params.map{|key, value| %Q(<input type="text" class="form-control form-control-sm" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
+    </form>
+</div>

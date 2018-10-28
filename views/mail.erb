@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>#{subject}</title>
+    <style type="text/css">
+        body {margin: 0; padding: 0; min-width: 100%!important;}
+        table {width: 100%; max-width: 600px;}  
+    </style>
+    <link href='//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' rel='stylesheet' />
+    <link href='/css/stylesheet.css' rel='stylesheet' />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+  </head>
+  <body class='container' yahoo bgcolor="#f6f8f1">
+    <legend >
+            Anmeldung zur Firmenkontaktmesse 2019
+            <br>
+            <small class="red tiny"> **=Frühbucherpreise bis 31.12.2018</small>
+        </legend>
+    <div class="tiny">
+        <table class="table table-sm">
+        <thead>
+            <tr>
+            <th scope="col">Angaben zur Firma:</th>
+            <th scope="col">&emsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Unternehmen:</td>
+            <td><%= @params["company"]%></td>
+            </tr>
+            <tr>
+            <td>Straße / Nr.:</td>
+            <td><%= @params["street"]%></td>
+            </tr>
+            <tr>
+            <td>PLZ:</td>
+            <td><%= @params["zip"]%></td>
+            </tr>
+            <tr>
+            <td>Ort:</td>
+            <td><%= @params["city"]%></td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+            <th scope="col">Ansprechpartner:</th>
+            <th scope="col">&emsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Anrede:</td>
+            <td><% if @params["gender"] == "m" %>Herr<% elsif @params["gender"] == "w" %>Frau<% else %>-<% end %></td>
+            </tr>
+            <tr>
+            <td>Titel:</td>
+            <td><%= @params["title"]%></td>
+            </tr>
+            <tr>
+            <td>Vorname:</td>
+            <td><%= @params["fname"]%></td>
+            </tr>
+            <tr>
+            <td>Nachname:</td>
+            <td><%= @params["lname"]%></td>
+            </tr>
+            <tr>
+            <td>Abteilung:</td>
+            <td><%= @params["department"]%></td>
+            </tr>
+            <tr>
+            <td>Telefon:</td>
+            <td><%= @params["phone"]%></td>
+            </tr>
+            <tr>
+            <td>Fax:</td>
+            <td><%= @params["fax"]%></td>
+            </tr>
+            <tr>
+            <td>E-Mail-Adresse:</td>
+            <td><%= @params["mail"]%></td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+            <th scope="col">Unternehmensvertreter vor Ort:</th>
+            <th scope="col">&emsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Anrede:</td>
+            <td><% if @params["ugender"] == "m" %>Herr<% elsif @params["ugender"] == "w" %>Frau<% else %>-<% end %></td>
+            </tr>
+            <tr>
+            <td>Titel:</td>
+            <td><%= @params["utitle"]%></td>
+            </tr>
+            <tr>
+            <td>Vorname:</td>
+            <td><%= @params["ufname"]%></td>
+            </tr>
+            <tr>
+            <td>Nachname:</td>
+            <td><%= @params["ulname"]%></td>
+            </tr>
+            <tr>
+            <td>Anzahl vor Ort:</td>
+            <td><%= @params["anz"]%></td>
+            </tr>
+        </tbody>
+        </table>
+        <table class="table table-sm">
+        <thead>
+            <tr>
+            <th scope="col">Paket:</th>
+            <th scope="col">Name:</th>
+            <th scope="col">Preis:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Leistungspaket:</td>
+            <td><% if @params["lp"] == "basic" %>"Basis"<% elsif @params["lp"] == "comfort" %>"Comfort"<% else %>"Comfort Plus"<% end %></td>
+            <td><% if @params["lp"] == "basic" %>620,00 EUR**<% elsif @params["lp"] == "comfort" %>800,00 EUR** EUR<% else %>1560,00 EUR** EUR<% end %></td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+            <th scope="col">Zusatzoption:</th>
+            <th scope="col">Name:</th>
+            <th scope="col">Preis:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Stellplatzreservierung:</td>
+            <td><% if @params["booking"] == "on" %>Ja<% elsif @params["comfortp"] == "on" %>Ja<% else %>Nein<% end %></td>
+            <td><% if @params["booking"] == "on" %>175,00 EUR**<% elsif @params["comfortp"] == "on" %>incl.<% else %>-<% end %></td>
+            </tr>
+            <tr>
+            <td>Werbeanzeige im Messekatalog:</td>
+            <td><% if @params["pres"] == "on" %>Ja<% else %>Nein<% end %></td>
+            <td><% if @params["pres"] == "on" %>160,00 EUR**<% else %>-<% end %></td>
+            </tr>
+            <tr>
+            <td>Logo im Messekatalog:</td>
+            <td><% if @params["elev"] == "on" %>Ja<% else %>Nein<% end %></td>
+            <td><% if @params["elev"] == "on" %>120,00 EUR**<% else %>-<% end %></td>
+            </tr>
+            <tr>
+            <td>Einladung in 2020:</td>
+            <td><% if @params["inv"] == "on" %>Ja<% else %>Nein<% end %></td>
+            <td>&emsp;</td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+            <th scope="col">Stellplatzreservierung:</th>
+            <th scope="col">NR:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Stellplatz</td>
+            <td><% if @params["spotID"].nil? %>-<% else %><%= @params["spotID"] %><% end %></td>
+            </tr>
+        </tbody>
+        </table>
+
+    </div>
+    </body>
+</html>

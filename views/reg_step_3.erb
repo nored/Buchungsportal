@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <div class="frame col-sm-6">
+            <form method="post" action="/validate_step_three">
+                <img class="deficon" src="/images/default.png"/>	
+                <p class="deftext">Standard</p>
+                <img class="comficon" src="/images/comfort.png"/>	
+                <p class="comftext">Comfort / Comfort Plus</p>
+                <img class="resicon" src="/images/res.png"/>
+                <p class="restext">Reserviert</p>
+                <img class="background" src="/images/plan.jpg"/>
+                <% @spots.each do |id, stat| %>
+                    <% if stat == "c" %>
+                        <button type="submit" name="spotID" value="<%= id %>" <% if params["lp"] == "basic" || (!params['spotID'].nil?) %><%= "disabled" %><% end %>><img title="Comfort" src="/images/comfort.png" class="img<%= id %>"</button> 
+                    <% elsif stat == "d" %>
+                        <button type="submit" name="spotID" value="<%= id %>" <% if (!params['spotID'].nil?) %><%= "disabled" %><% end %>><img title="Standard" src="/images/default.png" class="img<%= id %>"</button> 
+                    <% else %>
+                        <button type="submit" name="spotID" value="<%= id %>" disabled><img title="Reserviert" src="/images/res.png" class="img<%= id %>"</button>
+                    <% end %>
+                <% end %>
+                <%= params.map{|key, value| %Q(<input type="text" class="form-control" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
+        <% if (!params['spotID'].nil?) %>
+                </form>
+            <button type="submit" name="spotID" value="<%= params["spotID"] %>" disabled><img title="Reserviert" src="/images/res.png" class="img<%= params["spotID"] %>"</button>
+            </div>
+            <div class="col-sm-6 big-gap">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Sie haben Standplatz <%= params["spotID"] %> reserviert.</h5>
+                    <p class="card-text">Soll dieser Standplatz für Sie reserviert werden?</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="/step_three?<%= @aboard_params.map{|key, value| "#{key}=#{value}"}.join("&") %>" class="btn btn-danger">Abbrechen</a>
+                        </div>
+                        <div class="col-sm-6">
+                            <form method="post" action="/step_four">
+                                <button class="btn btn-primary" type="submit" name="spotID" value="<%= params["spotID"] %>" >Weiter</button>
+                                <%= params.map{|key, value| %Q(<input type="text" class="form-control" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% else %>
+            </form>
+            </div>
+            <div class="col-sm-6 big-gap-button">
+                <form method="get" action="/step_two">
+                    <button class="btn btn-danger" type="submit">Zurück</button>
+                    <%= params.map{|key, value| %Q(<input type="text" class="form-control" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
+                </form>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Unternehmen</th>
+      <th scope="col">Stellplatz</th>
+      <th scope="col">Löschen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @user["users"].each_with_index do |(k,v), i| %>
+        <%= "<th scope='row'>#{i+1}</th>" %>
+        <%= "<td>#{k}</th>" %>
+        <%= "<td>#{v}</th>" %>
+        <%= "<td>" %>
+        <%= "<form method='post' action='/backend'>" %>
+            <%= %Q(<button class="btn btn-danger" type="submit" name='deleteUser' value="">Löschen</button>) %>
+            <%= params.map{|key, value| %Q(<input type="text" class="form-control" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
+            <%= %Q(<input type="text" class="form-control" id="spotID" name="spotID" value="#{v}" hidden>) %>
+            <%= %Q(<input type="text" class="form-control" id="userID" name="userID" value="#{@spots[v]}" hidden>) %>
+        <%= "</form>" %>
+        <%= "</td>" %>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

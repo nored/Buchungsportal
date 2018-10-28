@@ -1,0 +1,171 @@
+<div class="container">
+    <legend >
+            Bitte überprüfen Sie Ihre Angaben
+            <br>
+            <small class="red tiny"> **=Frühbucherpreise bis 31.12.2018</small>
+        </legend>
+    <div class="row tiny">
+        <div class="col-sm-6">
+            <table class="table table-sm">
+            <thead>
+                <tr>
+                <th scope="col">Angaben zur Firma:</th>
+                <th scope="col">&emsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Unternehmen:</td>
+                <td><%= params["company"]%></td>
+                </tr>
+                <tr>
+                <td>Straße / Nr.:</td>
+                <td><%= params["street"]%></td>
+                </tr>
+                <tr>
+                <td>PLZ:</td>
+                <td><%= params["zip"]%></td>
+                </tr>
+                <tr>
+                <td>Ort:</td>
+                <td><%= params["city"]%></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                <th scope="col">Ansprechpartner:</th>
+                <th scope="col">&emsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Anrede:</td>
+                <td><% if params["gender"] == "m" %>Herr<% elsif params["gender"] == "w" %>Frau<% else %>-<% end %></td>
+                </tr>
+                <tr>
+                <td>Titel:</td>
+                <td><%= params["title"]%></td>
+                </tr>
+                <tr>
+                <td>Vorname:</td>
+                <td><%= params["fname"]%></td>
+                </tr>
+                <tr>
+                <td>Nachname:</td>
+                <td><%= params["lname"]%></td>
+                </tr>
+                <tr>
+                <td>Abteilung:</td>
+                <td><%= params["department"]%></td>
+                </tr>
+                <tr>
+                <td>Telefon:</td>
+                <td><%= params["phone"]%></td>
+                </tr>
+                <tr>
+                <td>Fax:</td>
+                <td><%= params["fax"]%></td>
+                </tr>
+                <tr>
+                <td>E-Mail-Adresse:</td>
+                <td><%= params["mail"]%></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                <th scope="col">Unternehmensvertreter vor Ort:</th>
+                <th scope="col">&emsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Anrede:</td>
+                <td><% if params["ugender"] == "m" %>Herr<% elsif params["ugender"] == "w" %>Frau<% else %>-<% end %></td>
+                </tr>
+                <tr>
+                <td>Titel:</td>
+                <td><%= params["utitle"]%></td>
+                </tr>
+                <tr>
+                <td>Vorname:</td>
+                <td><%= params["ufname"]%></td>
+                </tr>
+                <tr>
+                <td>Nachname:</td>
+                <td><%= params["ulname"]%></td>
+                </tr>
+                <tr>
+                <td>Anzahl vor Ort:</td>
+                <td><%= params["anz"]%></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <table class="table table-sm">
+            <thead>
+                <tr>
+                <th scope="col">Paket:</th>
+                <th scope="col">Name:</th>
+                <th scope="col">Preis:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Leistungspaket:</td>
+                <td><% if params["lp"] == "basic" %>"Basis"<% elsif params["lp"] == "comfort" %>"Comfort"<% else %>"Comfort Plus"<% end %></td>
+                <td><% if params["lp"] == "basic" %>620,00 EUR** statt 775,00 EUR<% elsif params["lp"] == "comfort" %>800,00 EUR** statt 1.000,00 EUR<% else %>1560,00 EUR** statt 1.950,00 EUR<% end %></td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                <th scope="col">Zusatzoption:</th>
+                <th scope="col">Name:</th>
+                <th scope="col">Preis:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Stellplatzreservierung:</td>
+                <td><% if params["booking"] == "on" %>Ja<% elsif params["comfortp"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if params["booking"] == "on" %>175,00 EUR** statt 220,00 EUR<% elsif params["comfortp"] == "on" %>incl.<% else %>-<% end %></td>
+                </tr>
+                <tr>
+                <td>Werbeanzeige im Messekatalog:</td>
+                <td><% if params["pres"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if params["pres"] == "on" %>160,00 EUR** statt 200,00 EUR<% else %>-<% end %></td>
+                </tr>
+                <tr>
+                <td>Logo im Messekatalog:</td>
+                <td><% if params["elev"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if params["elev"] == "on" %>120,00 EUR** statt 150,00 EUR<% else %>-<% end %></td>
+                </tr>
+                <tr>
+                <td>Einladung in 2020:</td>
+                <td><% if params["inv"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td>&emsp;</td>
+                </tr>
+            </tbody>
+            <thead>
+                <tr>
+                <th scope="col">Stellplatzreservierung:</th>
+                <th scope="col">NR:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Stellplatz</td>
+                <td><% if params["spotID"].nil? %>-<% else %><%= params["spotID"] %><% end %></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <form action='success' method='post'>
+        <input class="btn btn-danger" type="button" onclick="history.back();" value="Zurück">
+        <button type="submit" class="btn btn-danger">Verbindlich Buchen</button>
+        <%= params.map{|key, value| %Q(<input type="text" class="form-control form-control-sm" id="#{key}" name="#{key}" value="#{value}" hidden>)}.join("\n") %>
+    </form>
+<div>
+

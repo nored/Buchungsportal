@@ -1,0 +1,134 @@
+<div class="container">
+    <legend>Zusatzoptionen</legend>
+    <hr>
+    <div class="form-group row">
+        <legend class="col-form-label col-sm-4 pt-0">
+            <h6>Im Rahmen Ihrer Anmeldung buchen Sie automatisch das obligatorische Marketing-Paket.</h6>
+            <strong class="pricePackage red small"></strong>
+            <br>
+            <small class="tiny"></small>
+        </legend>
+        <div class="col-sm-8">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1" checked disabled>
+                <label class="form-check-label" for="gridCheck1">
+                    <ul class="col-md-8 description">
+                        <li><strong>Eintragung in alle offiziellen Print- und Online-Medien der FKM2019:</strong></li>
+                        <li><small class="medium">Firmenpräsentation:</small></li>
+                        <li class="noBullets">
+                            <ul>
+                                <li>Eintragung im alphabetischen Ausstellerverzeichnis auf der Webseite der THB (Firmenname, Anschrift, Internetadresse, Stand-Nr.)</li>
+                                <li>Eintragung im Messekatalog (print und online) je nach gebuchtem Paket</li>
+                            </ul>    
+                        </li>
+                        <li><small class="medium">Präsentation im Standplan:</small></li>
+                        <li class="noBullets">
+                            <ul>
+                                <li>Firmenname im Ausstellerverzeichnis zum Messe-Standplan</li>
+                                <li>Firmenlogo im Ausstellerverzeichnis zum Messe-Standplan (optional buchbar)</li>
+                                <li>Firmenlogo direkt im Messe-Standplan (Comfort-Plus)</li>
+                            </ul>    
+                        </li>
+                        <li><small class="medium">Ansprechpartner/in:</small></li>
+                        <li class="noBullets">
+                            <ul>
+                                <li>Hinterlegung von Kommunikationsdaten im Messekatalog (print und online)</li>
+                            </ul>    
+                        </li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <form action='validate_step_two' method='post' class="needs-validation" novalidate>
+        <% if params["lp"] == "comfort" || params["lp"] == "basic" %>
+            <div class="form-group row">
+                <legend class="col-form-label col-sm-4 pt-0">
+                    <h6>Stellplatzreservierung</h6>
+                    <strong class="pricePackage red small">175,00 EUR**</strong>
+                    <br>
+                    <small class="tiny">statt 220,00 EUR</small>
+                </legend>
+                <div class="col-sm-8">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="booking" id="booking">
+                        <label class="form-check-label" for="booking">
+                            <ul class="col-md-8 description">
+                                <li>Reservierung Ihres Wunschplatzes auf der FKM2019. First-Come-First-Serve-Prinzip.</li>
+                            </ul>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        <% else %>
+        <input class="form-check-input" type="checkbox" name="bookingincl" id="bookingincl" hidden checked>    
+        <% end %>
+        <div class="form-group row">
+            <legend class="col-form-label col-sm-4 pt-0">
+                <h6>Werbeanzeige im Messekatalog</h6>
+                <strong class="pricePackage red small">160,00 EUR**</strong>
+                <br>
+                <small class="tiny">statt 200,00 EUR</small>
+            </legend>
+            <div class="col-sm-8">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="pres" id="pres">
+                    <label class="form-check-label" for="pres">
+                        <ul class="col-md-8 description">
+                            <li>Ganzseitige Unternehmensindividuelle Präsentation (Werbeanzeige, Banner etc.) im Messekatalog zzgl. der Paket-gebuchten Firmenpräsentation</li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <legend class="col-form-label col-sm-4 pt-0">
+                <h6>Logo im Messekatalog</h6>
+                <strong class="pricePackage red small">120,00 EUR**</strong>
+                <br>
+                <small class="tiny">statt 150,00 EUR</small>
+            </legend>
+            <div class="col-sm-8">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="elev" id="elev">
+                    <label class="form-check-label" for="elev">
+                        <ul class="col-md-8 description">
+                            <li>Hervorhebung Ihrer Firmenpräsentation im Messekatalog durch Abbildung des Logos.</li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+            <legend class="col-form-label col-sm-4 pt-0">
+                <h6></h6>
+                <strong class="pricePackage red small"></strong>
+                <br>
+                <small class="tiny"></small>
+            </legend>
+            <div class="col-sm-8">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="inv" id="inv">
+                    <label class="form-check-label" for="inv">
+                        <ul class="col-md-8 description">
+                            <li>Bitte laden Sie uns für das Jahr 2020 ein.</li>
+                        </ul>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <input type="text" class="form-control" id="lp" name="lp" value="<%= params["lp"] %>" hidden>
+        <input type="text" class="form-control" id="sessionID" name="sessionID" value="<%= params["sessionID"] %>" hidden>
+        <div class="form-group row">
+            <div class="col-sm-10">
+            <input class="btn btn-danger" type="button" onclick="history.back();" value="Zurück">
+            <button type="submit" class="btn btn-primary">Weiter</button>
+            </div>
+        </div>
+    </form>
+</div>
