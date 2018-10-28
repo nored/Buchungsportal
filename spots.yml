@@ -18,13 +18,13 @@ spots:
   '16': d
   '17': d
   '18': d
-  '19': d
+  '19': 730dafeec79c93e14cd7519c9f8a3b59
   '20': c
   '21': c
   '22': d
   '23': d
   '24': d
-  '25': d
+  '25': da2f999226457112186d9e9310984cf9
   '26': c
   '27': c
   '28': c
@@ -33,4 +33,7 @@ spots:
   '31': c
   '32': c
   '33': c
-participants: {}
+participants:
+  730dafeec79c93e14cd7519c9f8a3b59: Test GmbH & Co. KG
+  a91d7d9aac4f6003710de63f741dee89: WirTestenDeineSeite.de
+  da2f999226457112186d9e9310984cf9: YourTest

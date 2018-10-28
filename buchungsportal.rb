@@ -183,7 +183,7 @@ class Buchungsportal < Sinatra::Base
   end
 
   post '/backend' do
-    if params["inputEmail"] == ENV['USERNAME'] && params["inputPassword"] == ENV['PASSWORD']
+    if params["inputEmail"] == ENV['BUSERNAME'] && params["inputPassword"] == ENV['PASSWORD']
       @store = YAML::Store.new 'spots.yml'
       @participants = @store.transaction { @store['participants'] }
       @spots = @store.transaction { @store['spots'] }
