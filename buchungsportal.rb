@@ -8,6 +8,7 @@ require 'sinatra/flash'
 require 'sinatra/cookies'
 require 'securerandom'
 require 'sinatra/form_helpers'
+require 'sinatra/session'
 require 'mail'
 require 'erb'
 require 'spork'
@@ -20,7 +21,7 @@ class Buchungsportal < Sinatra::Base
   register Sinatra::Flash
   set :protection, :except => :frame_options
   set :cookie_options, :domain => nil
-  
+  register Sinatra::Session
   use Rack::Session::Cookie, :key => 'rack.session',
   #                          :domain => ENV['DOMAIN'],
                             :path => '/',
