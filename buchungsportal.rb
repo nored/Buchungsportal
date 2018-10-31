@@ -368,6 +368,7 @@ class Buchungsportal < Sinatra::Base
     elsif session[:passwordhash] = ENV['PASSWORDHASH']
       if (!params["deleteUser"].nil?)
         deletebooking(params["spotID"], params["userID"], params["userSessionID"])
+        redirect "backend"
       elsif (!params["details"].nil?)
         @params = params.to_h
         erb :detail
