@@ -13,7 +13,8 @@ require 'erb'
 require 'spork'
 
 class Buchungsportal < Sinatra::Base
-
+  enable :sessions
+  helpers Sinatra::Cookies
   helpers Sinatra::FormHelpers
   enable :sessions
   register Sinatra::Flash
