@@ -16,7 +16,7 @@
                 </legend>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lp" id="basic" value="basic" checked>
+                        <input class="form-check-input" type="radio" name="lp" id="basic" value="basic" <% if session[:lp] == 'basic' %>checked<%end%> required>
                         <label class="form-check-label" for="basic">
                             <ul class="col-md-8 description">
                                 <li>Standfläche: 6 qm (2 x 3 m) inkl. Strom</li>
@@ -39,7 +39,7 @@
                 </legend>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lp" id="comfort" value="comfort" >
+                        <input class="form-check-input" type="radio" name="lp" id="comfort" value="comfort" <% if session[:lp] == 'comfort' %>checked<%end%> required>
                         <label class="form-check-label" for="comfort">
                             <ul class="col-md-8 description">
                                 <li>Standfläche: 12 qm (3 x 4 m) inkl. Strom</li>
@@ -63,7 +63,7 @@
                 </legend>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lp" id="comfortp" value="comfortp" >
+                        <input class="form-check-input" type="radio" name="lp" id="comfortp" value="comfortp" <% if session[:lp] == 'comfortp' %>checked<%end%> required>
                         <label class="form-check-label" for="comfortp">
                             <ul class="col-md-8 description">
                                 <li>Standfläche: 12 qm (3 x 4 m) inkl. Strom</li>
@@ -76,15 +76,18 @@
                                 <li>Catering und individuelle Betreuung am Messetag</li>
                             </ul>
                         </label>
+                        <div class="invalid-feedback">
+                            Bitte wählen Sie ein Leistungspaket aus.
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
         </fieldset>
         <div class="form-group row">
-        <div class="col-sm-10">
-            <button type='submit' class='btn btn-primary'>Weiter</button>
+            <div class="col-sm-10">
+                <button type='submit' class='btn btn-primary'>Weiter</button>
+            </div>
         </div>
-    </div>
     </form>
 </div>

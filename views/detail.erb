@@ -1,10 +1,11 @@
+<div class="col-md-4">
+    <a href="/backend" class="btn btn-danger" role="button">Zurück</a>
+</div>
 <div class="container">
     <legend >
-            Bitte überprüfen Sie Ihre Angaben
-            <br>
-            <small class="red tiny"> **=Frühbucherpreise bis 31.12.2018</small>
-        </legend>
-    <div class="row tiny">
+        Detailansicht
+    </legend>
+    <div class="row">
         <div class="col-sm-6">
             <table class="table table-sm">
             <thead>
@@ -16,19 +17,19 @@
             <tbody>
                 <tr>
                 <td>Unternehmen:</td>
-                <td><%= session[:company]%></td>
+                <td><%= @params["company"]%></td>
                 </tr>
                 <tr>
                 <td>Straße / Nr.:</td>
-                <td><%= session[:street]%></td>
+                <td><%= @params["street"]%></td>
                 </tr>
                 <tr>
                 <td>PLZ:</td>
-                <td><%= session[:zip]%></td>
+                <td><%= @params["zip"]%></td>
                 </tr>
                 <tr>
                 <td>Ort:</td>
-                <td><%= session[:city]%></td>
+                <td><%= @params["city"]%></td>
                 </tr>
             </tbody>
             <thead>
@@ -40,35 +41,35 @@
             <tbody>
                 <tr>
                 <td>Anrede:</td>
-                <td><% if session[:gender] == "m" %>Herr<% elsif session[:gender] == "w" %>Frau<% else %>-<% end %></td>
+                <td><% if @params["gender"] == "m" %>Herr<% elsif @params["gender"] == "w" %>Frau<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Titel:</td>
-                <td><%= session[:title]%></td>
+                <td><%= @params["title"]%></td>
                 </tr>
                 <tr>
                 <td>Vorname:</td>
-                <td><%= session[:fname]%></td>
+                <td><%= @params["fname"]%></td>
                 </tr>
                 <tr>
                 <td>Nachname:</td>
-                <td><%= session[:lname]%></td>
+                <td><%= @params["lname"]%></td>
                 </tr>
                 <tr>
                 <td>Abteilung:</td>
-                <td><%= session[:department]%></td>
+                <td><%= @params["department"]%></td>
                 </tr>
                 <tr>
                 <td>Telefon:</td>
-                <td><%= session[:phone]%></td>
+                <td><%= @params["phone"]%></td>
                 </tr>
                 <tr>
                 <td>Fax:</td>
-                <td><%= session[:fax]%></td>
+                <td><%= @params["fax"]%></td>
                 </tr>
                 <tr>
                 <td>E-Mail-Adresse:</td>
-                <td><%= session[:mail]%></td>
+                <td><%= @params["mail"]%></td>
                 </tr>
             </tbody>
             <thead>
@@ -80,23 +81,23 @@
             <tbody>
                 <tr>
                 <td>Anrede:</td>
-                <td><% if session[:ugender] == "m" %>Herr<% elsif session[:ugender] == "w" %>Frau<% else %>-<% end %></td>
+                <td><% if @params["ugender"] == "m" %>Herr<% elsif @params["ugender"] == "w" %>Frau<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Titel:</td>
-                <td><%= session[:utitle]%></td>
+                <td><%= @params["utitle"]%></td>
                 </tr>
                 <tr>
                 <td>Vorname:</td>
-                <td><%= session[:ufname]%></td>
+                <td><%= @params["ufname"]%></td>
                 </tr>
                 <tr>
                 <td>Nachname:</td>
-                <td><%= session[:ulname]%></td>
+                <td><%= @params["ulname"]%></td>
                 </tr>
                 <tr>
                 <td>Anzahl vor Ort:</td>
-                <td><%= session[:anz]%></td>
+                <td><%= @params["anz"]%></td>
                 </tr>
             </tbody>
             </table>
@@ -113,8 +114,8 @@
             <tbody>
                 <tr>
                 <td>Leistungspaket:</td>
-                <td><% if session[:lp] == "basic" %>"Basis"<% elsif session[:lp] == "comfort" %>"Comfort"<% else %>"Comfort Plus"<% end %></td>
-                <td><% if session[:lp] == "basic" %>620,00 EUR** statt 775,00 EUR<% elsif session[:lp] == "comfort" %>800,00 EUR** statt 1.000,00 EUR<% else %>1560,00 EUR** statt 1.950,00 EUR<% end %></td>
+                <td><% if @params["lp"] == "basic" %>"Basis"<% elsif @params["lp"] == "comfort" %>"Comfort"<% else %>"Comfort Plus"<% end %></td>
+                <td><% if @params["lp"] == "basic" %>620,00 EUR** statt 775,00 EUR<% elsif @params["lp"] == "comfort" %>800,00 EUR** statt 1.000,00 EUR<% else %>1560,00 EUR** statt 1.950,00 EUR<% end %></td>
                 </tr>
             </tbody>
             <thead>
@@ -127,22 +128,22 @@
             <tbody>
                 <tr>
                 <td>Stellplatzreservierung:</td>
-                <td><% if session[:booking] == "on" %>Ja<% elsif session[:comfortp] == "on" %>Ja<% else %>Nein<% end %></td>
-                <td><% if session[:booking] == "on" %>175,00 EUR** statt 220,00 EUR<% elsif session[:comfortp] == "on" %>incl.<% else %>-<% end %></td>
+                <td><% if @params["booking"] == "on" %>Ja<% elsif @params["comfortp"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if @params["booking"] == "on" %>175,00 EUR** statt 220,00 EUR<% elsif @params["comfortp"] == "on" %>incl.<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Werbeanzeige im Messekatalog:</td>
-                <td><% if session[:pres] == "on" %>Ja<% else %>Nein<% end %></td>
-                <td><% if session[:pres] == "on" %>160,00 EUR** statt 200,00 EUR<% else %>-<% end %></td>
+                <td><% if @params["pres"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if @params["pres"] == "on" %>160,00 EUR** statt 200,00 EUR<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Logo im Messekatalog:</td>
-                <td><% if session[:elev] == "on" %>Ja<% else %>Nein<% end %></td>
-                <td><% if session[:elev] == "on" %>120,00 EUR** statt 150,00 EUR<% else %>-<% end %></td>
+                <td><% if @params["elev"] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if @params["elev"] == "on" %>120,00 EUR** statt 150,00 EUR<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Einladung in 2020:</td>
-                <td><% if session[:inv] == "on" %>Ja<% else %>Nein<% end %></td>
+                <td><% if @params["inv"] == "on" %>Ja<% else %>Nein<% end %></td>
                 <td>&emsp;</td>
                 </tr>
             </tbody>
@@ -155,16 +156,11 @@
             <tbody>
                 <tr>
                 <td>Stellplatz</td>
-                <td><% if session[:spotID].nil? %>-<% else %><%= session[:spotID] %><% end %></td>
+                <td><% if @params["spotID"].nil? %>-<% else %><%= @params["spotID"] %><% end %></td>
                 </tr>
             </tbody>
             </table>
         </div>
     </div>
-    <hr>
-    <form action='success' method='post'>
-        <a href="/step_four" class="btn btn-danger" role="button">Zurück</a>
-        <button type="submit" class="btn btn-success">Verbindlich Buchen</button>
-    </form>
 <div>
 

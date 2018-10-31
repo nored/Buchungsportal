@@ -5,6 +5,7 @@
         <th scope="col">#</th>
         <th scope="col">Unternehmen</th>
         <th scope="col">Stellplatz</th>
+        <th scope="col">Buchungsdeteils</th>
         <th scope="col">Löschen</th>
       </tr>
     </thead>
@@ -12,16 +13,20 @@
       <% @user["users"].each_with_index do |(k,v), i| %>
         <tr>
           <%= "<th scope='row'>#{i+1}</th>" %>
-          <%= "<td>#{k}</th>" %>
+          <%= "<td>#{k["company"]}</th>" %>
           <%= "<td>#{v.nil? ? "ohne" : v}</th>" %>
           <%= "<td>" %>
           <%= "<form method='post' action='/backend'>" %>
-              <%= %Q(<input type="text" class="form-control" id="inputEmail" name='inputEmail' value="#{params["inputEmail"]}"hidden>) %>
-              <%= %Q(<input type="text" class="form-control" id="inputPassword" name='inputPassword' value="#{params["inputPassword"]}"hidden>) %>
+              <%= %Q(<button class="btn btn-info" type="submit" name='details' value="">Details</button>) %>
+              <%= k.map{|key, value| %Q(<input type="text" class="form-control form-control-sm" id='#{key}' name='#{key}' value='#{value}' hidden>)}.join("\n") %>
+          <%= "</form>" %>
+          <%= "</td>" %>
+          <%= "<td>" %>
+          <%= "<form method='post' action='/backend'>" %>
               <%= %Q(<button class="btn btn-danger" type="submit" name='deleteUser' value="">Löschen</button>) %>
               <%= %Q(<input type="text" class="form-control" id="spotID" name="spotID" value="#{v}" hidden>) %>
               <%= %Q(<input type="text" class="form-control" id="userID" name="userID" value="#{@spots[v]}" hidden>) %>
-              <%= %Q(<input type="text" class="form-control" id="userKey" name="userKey" value="#{k}" hidden>) %>
+              <%= %Q(<input type="text" class="form-control" id="userSessionID" name="userSessionID" value='#{k["sessionID"]}' hidden>) %>
           <%= "</form>" %>
           <%= "</td>" %>
         </tr>

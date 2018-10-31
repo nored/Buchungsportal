@@ -19,6 +19,12 @@ class Buchungsportal < Sinatra::Base
   register Sinatra::Flash
   set :protection, :except => :frame_options
 
+  use Rack::Session::Cookie, :key => 'rack.session',
+  #                          :domain => ENV['DOMAIN'],
+                            :path => '/',
+                            :expire_after => 2592000, # In seconds
+                            :secret => ENV['PASSWORDHASH']
+
   Spots = {
     '1' => 'c',
     '2' => 'c',
@@ -56,108 +62,75 @@ class Buchungsportal < Sinatra::Base
   }
 
   Participants = {}
+  Timestamps = {}
 
-  get '/' do
-    if !(File.file?("spots.yml")) 
-      @store = YAML::Store.new 'spots.yml'
-      @store.transaction do
-        @store['spots'] ||= Spots
-        @store['participants'] ||= Participants
-      end
-    end
-    @store = YAML::Store.new 'spots.yml'
-    @participants = @store.transaction { @store['participants'] }
-    if @participants.keys.count <= 32
-      erb :reg_step_1
-    else
-      erb :stop    
-    end
-  end
-
-  post '/validate_step_one' do
-    if params["lp"] == "basic" || params["lp"] == "comfort" || params["lp"] == "comfortp"
-      query = params.map{|key, value| "#{key}=#{value}"}.join("&")
-      @session_id = SecureRandom.hex
-      redirect "/step_two?#{query}&sessionID=#{@session_id}"
-    else
-      flash[:error] = "Bitte wählen Sie ein Leistungspaket."
-      redirect "/"
-    end
-  end
-
-  get '/step_two' do
-    erb :reg_step_2
-  end
-
-  post '/validate_step_two' do
-    query = params.map{|key, value| "#{key}=#{value}"}.join("&")
-    if params["booking"] == "on" || params["bookingincl"] == "on" 
-      redirect "step_three?#{query}"
-    else
-      redirect "step_four?#{query}"
-    end
-  end
-
-  get '/step_three' do
-    @store = YAML::Store.new 'spots.yml'
-    @spots = @store.transaction { @store['spots'] }
-    erb :reg_step_3
-  end
-
-  post '/validate_step_three' do
-    @id = params['spotID']
-    @session_id = params['sessionID']
-    puts params.class
-    @aboard_params = params.to_h
-    @aboard_params.delete("spotID")
-    @store = YAML::Store.new 'spots.yml'  
-    @spots = @store.transaction { @store['spots'] }
-    @oldSpots = @store.transaction { @store['spots'] }.nil? ? Spots : @store.transaction { @store['spots'] }
-    if @spots.values.include?(@session_id)
-      old_Spots = @spots.select {|k,v| v == @session_id}
-      old_Spots.keys.each do |k| 
+  helpers do
+    def createDB()
+      if !(File.file?("spots.yml")) 
+        @store = YAML::Store.new 'spots.yml'
         @store.transaction do
-          @store['spots'] ||= @oldSpots
-          @store['spots'][k] = Spots[k]
+          @store['spots'] ||= Spots
+          @store['participants'] ||= Participants
+          @store['timestamps'] ||= Timestamps
         end
       end
     end
-    erb :reg_step_3
-  end
-
-  post '/step_four' do
-    @id = params['spotID']
-    @session_id = params['sessionID']
-    @store = YAML::Store.new 'spots.yml'
-    @oldSpots = @store.transaction { @store['spots'] }.nil? ? Spots : @store.transaction { @store['spots'] }
-    @store.transaction do
-      @store['spots'] ||= @oldSpots
-      @store['spots'][@id] = @session_id
-    end
-    erb :reg_step_4
-  end
-
-  get '/step_four' do
-    erb :reg_step_4
-  end
-
-  post '/validate_step_four' do
-    erb :val
-  end
-
-  post '/success' do
-    @recipient = params["mail"]
-    Spork.prefork do  
-      @params = params.to_h
-      @mails = ["#{@recipient}","#{ENV['MAIL1']}"]
+    def getSpotsFromDB()
       @store = YAML::Store.new 'spots.yml'
-      @session_id = params['sessionID']
-      @company = params["company"]
-      @oldParticipants = @store.transaction { @store['participants'] }.nil? ? Participants : @store.transaction { @store['participants'] }
+      @spots = @store.transaction { @store['spots'] }
+    end
+    def getParticipantsFromDB()
+      @store = YAML::Store.new 'spots.yml'
+      @participants = @store.transaction { @store['participants'] }
+    end
+    def setTimeStamp(id)
+      @store = YAML::Store.new 'spots.yml'
+      oldTransactions = @store.transaction { @store['timestamps'] }.nil? ? Timestamps : @store.transaction { @store['timestamps'] }
       @store.transaction do
-        @store['participants'] ||= @oldSpots
-        @store['participants'][@session_id] = @company
+        @store['timestamps'][id] = Time.now
       end
+    end
+    def removeUnintentionalBookings(id)
+      if (!id.nil?)
+        @store = YAML::Store.new 'spots.yml'  
+        participants = @store.transaction { @store['participants'] }
+        if (!participants.values.include?(id))
+          @store.transaction do
+            @store['spots'][id] = Spots[id]
+          end
+        end
+      end
+    end
+    def removeMultiBookings(id)
+      @store = YAML::Store.new 'spots.yml'  
+      @spots = @store.transaction { @store['spots'] }
+      if @spots.values.include?(id)
+        old_Spots = @spots.select {|k,v| v == id}
+        old_Spots.keys.each do |k| 
+          @store.transaction do
+            @store['spots'][k] = Spots[k]
+          end
+        end
+      end
+    end
+    def bookSpot(id, sessionID)
+      @store = YAML::Store.new 'spots.yml'
+      @store.transaction do
+        @store['spots'][id] = sessionID
+      end
+    end
+    def saveParticipant(data)
+      @store = YAML::Store.new 'spots.yml'
+      @store.transaction do
+        @store['participants'][data[:sessionID]] = data
+      end
+    end
+    def compileBody(params)
+      @params = params
+      mail = ERB.new(File.read('./views/mail.erb').force_encoding("UTF-8")).result(binding)
+    end
+    def writeMail(recipients, params)
+      compileBody(params)
       user = ENV['MAILUSER']
       pass = ENV['MAILPASSWORD']
       mail = ERB.new(File.read('./views/mail.erb').force_encoding("UTF-8")).result(binding)
@@ -172,7 +145,7 @@ class Buchungsportal < Sinatra::Base
       Mail.defaults do
         delivery_method :smtp, options
       end
-      @mails.each do |m|
+      recipients.each do |m|
         Mail.deliver do
           to "#{m}"
           from "#{ENV['MAIL2']}"
@@ -180,33 +153,229 @@ class Buchungsportal < Sinatra::Base
           content_type 'text/html; charset=UTF-8'
           body "#{mail}"
         end
-      end 
+      end
     end
+    def deletebooking(spotID, userID, userSessionID)
+      @store = YAML::Store.new 'spots.yml'
+      getParticipantsFromDB()
+      getSpotsFromDB()
+      @spots.delete(spotID)
+      if userID.empty?
+        @participants.delete(userSessionID)
+      else
+        @participants.delete(userID)
+      end
+      @participants.delete(userID)
+      @store.transaction do
+        @store['spots'][spotID] = Spots[spotID] if  (!spotID.empty?)
+        @store['participants'] = @participants
+      end
+    end
+    def invalidateSession(id)
+      store = YAML::Store.new 'spots.yml'
+      store.transaction do
+        store['timestamps'][id] += 1800
+      end
+    end
+    def getTimestamps()
+      store = YAML::Store.new 'spots.yml'
+      timestamps = store.transaction { store['timestamps'] }
+    end
+    def checkSession(id)
+      timestamps = getTimestamps()
+      if timestamps[id].nil?
+        return true
+      end
+      timestamps = getTimestamps()
+      timestamps[id] + 1800 < Time.now
+    end
+    def removeTimestamp(id)
+      store = YAML::Store.new 'spots.yml'
+      timestamps = store.transaction { store['timestamps'] }
+      timestamps.delete(id)
+      store.transaction do
+        store['timestamps'] = timestamps
+      end
+    end
+    def removeUnfinishedBookings()
+      timestamps = getTimestamps()
+      spots = getSpotsFromDB()
+      participants = getParticipantsFromDB()
+      timestamps.each do | k,v |
+        puts k
+        if checkSession(k) && (spots.values.include?(k)) && participants[k].nil?
+          removeUnintentionalBookings(spots.key(k))
+          removeTimestamp(k)
+        end
+      end
+    end
+  end
+
+  get '/' do
+    createDB()
+    @store = YAML::Store.new 'spots.yml'
+    @participants = @store.transaction { @store['participants'] }
+    if @participants.keys.count <= 32
+      erb :reg_step_1
+    else
+      erb :stop    
+    end
+  end
+
+  post '/validate_step_one' do
+    if params["lp"] == "basic" || params["lp"] == "comfort" || params["lp"] == "comfortp"
+      session[:lp] = params["lp"]
+      if session[:sessionID].nil?
+        sessionID = SecureRandom.hex
+        session[:sessionID] = sessionID
+        setTimeStamp(sessionID)
+      end
+      redirect "/step_two"
+    else
+      flash[:error] = "Bitte wählen Sie ein Leistungspaket."
+      redirect "/"
+    end
+  end
+
+  get '/step_two' do
+    erb :reg_step_2
+  end
+
+  get '/invalid_session' do
+    removeTimestamp(session[:sessionID]) if (!session[:sessionID].nil?)
+    session[:sessionID] = nil
+    erb :invalidSession
+  end
+
+  post '/validate_step_two' do
+    session[:booking] = params["booking"]
+    session[:pres] = params["pres"]
+    session[:elev] = params["elev"]
+    session[:inv] = params["inv"]
+    session[:bookingincl] = params["bookingincl"]
+    if checkSession(session[:sessionID])
+      redirect "invalid_session"
+    elsif params["booking"] == "on" || params["bookingincl"] == "on" 
+      redirect "step_three"
+    else
+      redirect "step_four"
+    end
+  end
+
+  get '/step_three' do
+    removeUnfinishedBookings()
+    removeUnintentionalBookings(session[:spotID])
+    getSpotsFromDB()
+    erb :reg_step_3
+  end
+
+  post '/validate_step_three' do
+    if checkSession(session[:sessionID])
+      redirect "invalid_session"
+    else
+      removeMultiBookings(session[:sessionID])
+      getSpotsFromDB()
+      erb :reg_step_3
+    end
+  end
+
+  get '/validate_step_three' do
+    removeUnfinishedBookings()
+    removeUnintentionalBookings(session[:spotID])
+    if checkSession(session[:sessionID])
+      redirect "invalid_session"
+    else
+      getSpotsFromDB()
+      params['spotID'] = session[:spotID]
+      erb :reg_step_3
+    end
+  end
+
+  post '/step_four' do
+    if checkSession(session[:sessionID])
+      redirect "invalid_session"
+    else
+      session[:spotID] = params['spotID']
+      bookSpot(session[:spotID], session[:sessionID])
+      redirect "step_four"
+    end
+  end
+
+  get '/step_four' do
+    erb :reg_step_4
+  end
+
+  post '/validate_step_four' do
+    if checkSession(session[:sessionID])
+      redirect "invalid_session"
+    else
+      session[:company] = params['company']
+      session[:street] = params['street']
+      session[:zip] = params['zip']
+      session[:city] = params['city']
+      session[:gender] = params['gender']
+      session[:title] = params['title']
+      session[:fname] = params['fname']
+      session[:lname] = params['lname']
+      session[:department] = params['department']
+      session[:phone] = params['phone']
+      session[:fax] = params['fax']
+      session[:mail] = params['mail']
+      session[:ugender] = params['ugender']
+      session[:utitle] = params['utitle']
+      session[:ufname] = params['ufname']
+      session[:ulname] = params['ulname']
+      session[:anz] = params['anz']    
+      redirect "evaluate"
+    end
+  end
+
+  get '/evaluate' do
+    if checkSession(session[:sessionID])
+      redirect "invalid_session"
+    else
+      erb :val
+    end
+  end
+
+  post '/success' do
+    data = session.to_h
+    saveParticipant(data)
+    Spork.prefork do  
+      writeMail(["#{session[:mail]}","#{ENV['MAIL1']}"], data)
+    end
+    invalidateSession(session[:sessionID])
     erb :success
   end
 
   get '/login' do
-    erb :login
+    if session[:passwordhash] == ENV['PASSWORDHASH']
+      redirect "backend"
+    else
+      erb :login
+    end
   end
 
   post '/backend' do
     if params["inputEmail"] == ENV['BUSERNAME'] && params["inputPassword"] == ENV['PASSWORD']
-      @store = YAML::Store.new 'spots.yml'
-      @participants = @store.transaction { @store['participants'] }
-      @spots = @store.transaction { @store['spots'] }
+      session[:passwordhash] = ENV['PASSWORDHASH']
+      redirect "backend"
+    elsif session[:passwordhash] = ENV['PASSWORDHASH']
       if (!params["deleteUser"].nil?)
-        @spots.delete(params["spotID"])
-        if params["userID"].empty?
-          @participants.delete(@participants.key(params["userKey"]))
-        else
-          @participants.delete(params["userID"])
-        end
-        @participants.delete(params["userID"])
-        @store.transaction do
-          @store['spots'][params["spotID"]] = Spots[params["spotID"]] if  (!params["spotID"].empty?)
-          @store['participants'] = @participants
-        end
+        deletebooking(params["spotID"], params["userID"], params["userSessionID"])
+      elsif (!params["details"].nil?)
+        puts params.inspect
+        puts @params.inspect
+        @params = params.to_h
+        erb :detail
       end
+    end
+  end
+  get '/backend' do
+    if session[:passwordhash] == ENV['PASSWORDHASH']
+      @store = YAML::Store.new 'spots.yml'
+      getParticipantsFromDB()
+      getSpotsFromDB()
       @user = Hash.new()
       @user["users"] = {}
       @participants.keys.each do |k|
@@ -219,4 +388,5 @@ class Buchungsportal < Sinatra::Base
       redirect "/login"
     end
   end
+
 end

@@ -42,7 +42,7 @@
     </div>
     <hr>
     <form action='validate_step_two' method='post' class="needs-validation" novalidate>
-        <% if params["lp"] == "comfort" || params["lp"] == "basic" %>
+        <% if session[:lp] == "comfort" || session[:lp] == "basic" %>
             <div class="form-group row">
                 <legend class="col-form-label col-sm-4 pt-0">
                     <h6>Stellplatzreservierung</h6>
@@ -52,7 +52,7 @@
                 </legend>
                 <div class="col-sm-8">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="booking" id="booking">
+                        <input class="form-check-input" type="checkbox" name="booking" id="booking" <% if session[:booking] == 'on' %>checked<%end%>>
                         <label class="form-check-label" for="booking">
                             <ul class="col-md-8 description">
                                 <li>Reservierung Ihres Wunschplatzes auf der FKM2019. First-Come-First-Serve-Prinzip.</li>
@@ -74,7 +74,7 @@
             </legend>
             <div class="col-sm-8">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="pres" id="pres">
+                    <input class="form-check-input" type="checkbox" name="pres" id="pres" <% if session[:pres] == 'on' %>checked<%end%>>
                     <label class="form-check-label" for="pres">
                         <ul class="col-md-8 description">
                             <li>Ganzseitige Unternehmensindividuelle Präsentation (Werbeanzeige, Banner etc.) im Messekatalog zzgl. der Paket-gebuchten Firmenpräsentation</li>
@@ -93,7 +93,7 @@
             </legend>
             <div class="col-sm-8">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="elev" id="elev">
+                    <input class="form-check-input" type="checkbox" name="elev" id="elev" <% if session[:elev] == 'on' %>checked<%end%>>
                     <label class="form-check-label" for="elev">
                         <ul class="col-md-8 description">
                             <li>Hervorhebung Ihrer Firmenpräsentation im Messekatalog durch Abbildung des Logos.</li>
@@ -112,7 +112,7 @@
             </legend>
             <div class="col-sm-8">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="inv" id="inv">
+                    <input class="form-check-input" type="checkbox" name="inv" id="inv" <% if session[:inv] == 'on' %>checked<%end%>>
                     <label class="form-check-label" for="inv">
                         <ul class="col-md-8 description">
                             <li>Bitte laden Sie uns für das Jahr 2020 ein.</li>
@@ -122,11 +122,9 @@
             </div>
         </div>
         <hr>
-        <input type="text" class="form-control" id="lp" name="lp" value="<%= params["lp"] %>" hidden>
-        <input type="text" class="form-control" id="sessionID" name="sessionID" value="<%= params["sessionID"] %>" hidden>
         <div class="form-group row">
             <div class="col-sm-10">
-            <input class="btn btn-danger" type="button" onclick="history.back();" value="Zurück">
+            <a href="/" class="btn btn-danger" role="button">Zurück</a>
             <button type="submit" class="btn btn-primary">Weiter</button>
             </div>
         </div>

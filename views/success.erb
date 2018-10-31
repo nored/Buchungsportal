@@ -1,6 +1,6 @@
 <div class="container">
   <div class="jumbotron">
     <h1 class="display-4">Vielen Dank für Ihre Anmeldung</h1>
-    <p class="lead red">Eine Bestätigung Ihrer Anmeldung ist an <%= @recipient %> versandt worden.</p>
+    <p class="lead red">Eine Bestätigung Ihrer Anmeldung ist an <%= session[:mail] %> versandt worden.</p>
   </div>
 </div>
