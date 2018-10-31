@@ -8,8 +8,8 @@ spots:
   '6': c
   '7': d
   '8': d
-  '9': d
-  '10': 318bd25b67926bf4bef3b7f56cbffbb4
+  '9': 318bd25b67926bf4bef3b7f56cbffbb4
+  '10': d
   '11': c
   '12': d
   '13': d
@@ -46,21 +46,21 @@ participants:
     pres: 'on'
     elev: 'on'
     inv: 'on'
-    spotID: '10'
-    company: dadawaw
-    street: awdawd
-    zip: awdawd
-    city: awdawd
+    spotID: '9'
+    company: asdasd
+    street: asdasd
+    zip: asdasd
+    city: asdasd
     title: ''
-    fname: awdad
-    lname: awdawd
+    fname: asdasd
+    lname: asdasd
     department: ''
-    phone: awdawd
+    phone: asdasd
     fax: ''
-    mail: awdawd@awdaw
+    mail: asdasd@adad
     utitle: ''
-    ufname: awdawd
-    ulname: awdaw
+    ufname: asdasd
+    ulname: asdsda
     anz: '1'
     sessionID: 318bd25b67926bf4bef3b7f56cbffbb4
 timestamps:

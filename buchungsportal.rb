@@ -175,9 +175,8 @@ class Buchungsportal < Sinatra::Base
       end
     end
     def invalidateSession(id)
-      store = YAML::Store.new 'spots.yml'
-      store.transaction do
-        store['timestamps'][id] += 1800
+      session.keys.each do |k|
+        session[k] = nil
       end
     end
     def getTimestamps()
