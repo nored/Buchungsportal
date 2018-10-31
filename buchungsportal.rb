@@ -22,7 +22,7 @@ class Buchungsportal < Sinatra::Base
   use Rack::Session::Cookie, :key => 'rack.session',
   #                          :domain => ENV['DOMAIN'],
                             :path => '/',
-                            :expire_after => 2592000, # In seconds
+                            :expire_after => 2000, # In seconds
                             :secret => ENV['PASSWORDHASH']
 
   Spots = {
@@ -202,7 +202,6 @@ class Buchungsportal < Sinatra::Base
       spots = getSpotsFromDB()
       participants = getParticipantsFromDB()
       timestamps.each do | k,v |
-        puts k
         if checkSession(k) && (spots.values.include?(k)) && participants[k].nil?
           removeUnintentionalBookings(spots.key(k))
           removeTimestamp(k)
@@ -364,8 +363,6 @@ class Buchungsportal < Sinatra::Base
       if (!params["deleteUser"].nil?)
         deletebooking(params["spotID"], params["userID"], params["userSessionID"])
       elsif (!params["details"].nil?)
-        puts params.inspect
-        puts @params.inspect
         @params = params.to_h
         erb :detail
       end
