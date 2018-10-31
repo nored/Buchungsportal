@@ -19,7 +19,8 @@ class Buchungsportal < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
   set :protection, :except => :frame_options
-
+  set :cookie_options, :domain => nil
+  
   use Rack::Session::Cookie, :key => 'rack.session',
   #                          :domain => ENV['DOMAIN'],
                             :path => '/',
