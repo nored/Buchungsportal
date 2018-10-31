@@ -125,7 +125,7 @@ class Buchungsportal < Sinatra::Base
     def saveParticipant(data)
       @store = YAML::Store.new 'spots.yml'
       @store.transaction do
-        @store['participants'][data[:sessionID]] = data
+        @store['participants'][data["sessionID"]] = data
       end
     end
     def compileBody(params)
@@ -205,9 +205,14 @@ class Buchungsportal < Sinatra::Base
       spots = getSpotsFromDB()
       participants = getParticipantsFromDB()
       timestamps.each do | k,v |
-        if checkSession(k) && (spots.values.include?(k)) && participants[k].nil?
-          removeUnintentionalBookings(spots.key(k))
-          removeTimestamp(k)
+        puts "participants nil?=#{participants[k].nil?}"
+        if checkSession(k) 
+          if (spots.values.include?(k)) 
+            if participants[k].nil?
+              removeUnintentionalBookings(spots.key(k))
+              removeTimestamp(k)
+            end
+          end
         end
       end
     end
@@ -266,7 +271,6 @@ class Buchungsportal < Sinatra::Base
 
   get '/step_three' do
     removeUnfinishedBookings()
-    removeUnintentionalBookings(session[:spotID])
     getSpotsFromDB()
     erb :reg_step_3
   end
@@ -283,7 +287,6 @@ class Buchungsportal < Sinatra::Base
 
   get '/validate_step_three' do
     removeUnfinishedBookings()
-    removeUnintentionalBookings(session[:spotID])
     if checkSession(session[:sessionID])
       redirect "invalid_session"
     else

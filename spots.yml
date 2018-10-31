@@ -1,0 +1,67 @@
+---
+spots:
+  '1': c
+  '2': c
+  '3': c
+  '4': c
+  '5': c
+  '6': c
+  '7': d
+  '8': d
+  '9': d
+  '10': 318bd25b67926bf4bef3b7f56cbffbb4
+  '11': c
+  '12': d
+  '13': d
+  '14': d
+  '15': d
+  '16': d
+  '17': d
+  '18': d
+  '19': d
+  '20': c
+  '21': c
+  '22': d
+  '23': d
+  '24': d
+  '25': d
+  '26': c
+  '27': c
+  '28': c
+  '29': c
+  '30': c
+  '31': c
+  '32': c
+  '33': c
+participants:
+  318bd25b67926bf4bef3b7f56cbffbb4:
+    session_id: 175026d2377659e671e012bbc71330e0e8a9524db4f1d6a6aedcbfd85189ec1e
+    csrf: 3KGe4KUTYOXL+NnSPkX+6o2OiPLJ9Au1hJE7PrxZmvc=
+    tracking:
+      HTTP_USER_AGENT: 897509563063d07025f15df67baa6165920a7e5a
+      HTTP_ACCEPT_LANGUAGE: 144df821b511cf5acaf7e1b8cce2a66e6542aae5
+    flash: {}
+    lp: comfort
+    booking: 'on'
+    pres: 'on'
+    elev: 'on'
+    inv: 'on'
+    spotID: '10'
+    company: dadawaw
+    street: awdawd
+    zip: awdawd
+    city: awdawd
+    title: ''
+    fname: awdad
+    lname: awdawd
+    department: ''
+    phone: awdawd
+    fax: ''
+    mail: awdawd@awdaw
+    utitle: ''
+    ufname: awdawd
+    ulname: awdaw
+    anz: '1'
+    sessionID: 318bd25b67926bf4bef3b7f56cbffbb4
+timestamps:
+  318bd25b67926bf4bef3b7f56cbffbb4: 2018-10-31 17:25:11.761412986 +01:00
