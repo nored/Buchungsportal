@@ -174,7 +174,7 @@ class Buchungsportal < Sinatra::Base
         @store['participants'] = @participants
       end
     end
-    def invalidateSession(id)
+    def invalidateSession()
       session.keys.each do |k|
         session[k] = nil
       end
@@ -248,8 +248,7 @@ class Buchungsportal < Sinatra::Base
   end
 
   get '/invalid_session' do
-    removeTimestamp(session[:sessionID]) if (!session[:sessionID].nil?)
-    session[:sessionID] = nil
+    invalidateSession()
     erb :invalidSession
   end
 
@@ -345,10 +344,11 @@ class Buchungsportal < Sinatra::Base
   post '/success' do
     data = session.to_h
     saveParticipant(data)
+    @mail = session[:mail]
     Spork.prefork do  
-      writeMail(["#{session[:mail]}","#{ENV['MAIL1']}"], data)
+      writeMail(["#{@mail}","#{ENV['MAIL1']}"], data)
     end
-    invalidateSession(session[:sessionID])
+    invalidateSession()
     erb :success
   end
 
