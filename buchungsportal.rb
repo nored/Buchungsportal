@@ -289,7 +289,7 @@ class Buchungsportal < Sinatra::Base
           else
             a.push("Nein")
           end
-          if participants[k]["inf"] == "on"
+          if participants[k]["inv"] == "on"
             a.push("Ja")
           else
             a.push("Nein")
