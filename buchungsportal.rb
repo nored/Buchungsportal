@@ -11,10 +11,9 @@ require 'sinatra/form_helpers'
 require 'sinatra/session'
 require 'mail'
 require 'erb'
-require 'spork'
+require 'csv'
 
 class Buchungsportal < Sinatra::Base
-  enable :sessions
   helpers Sinatra::Cookies
   helpers Sinatra::FormHelpers
   enable :sessions
@@ -22,6 +21,7 @@ class Buchungsportal < Sinatra::Base
   set :protection, :except => :frame_options
   set :cookie_options, :domain => nil
   register Sinatra::Session
+  set :session_secret, ENV['PASSWORDHASH']
   use Rack::Session::Cookie, :key => 'rack.session',
   #                          :domain => ENV['DOMAIN'],
                             :path => '/',
@@ -66,7 +66,31 @@ class Buchungsportal < Sinatra::Base
 
   Participants = {}
   Timestamps = {}
-
+  TableHeader = [
+    "Unternehmen",
+    "Straße / Nr.",
+    "PLZ",
+    "Ort",
+    "Ansprechpartner Anrede",
+    "Ansprechpartner Titel",
+    "Ansprechpartner Vorname",
+    "Ansprechpartner Nachname",
+    "Ansprechpartner Abteilung",
+    "Ansprechpartner Telefon",
+    "Ansprechpartner Fax",
+    "Ansprechpartner E-Mail-Adresse",
+    "Unternehmensvertreter Anrede",
+    "Unternehmensvertreter Titel",
+    "Unternehmensvertreter Vorname",
+    "Unternehmensvertreter Nachname",
+    "Anzahl vor Ort",
+    "Leistungspaket",
+    "Stellplatzreservierung",
+    "Werbeanzeige im Messekatalog",
+    "Logo im Messekatalog",
+    "Einladung in 2020",
+    "Stellplatz"
+  ]
   helpers do
     def createDB()
       if !(File.file?("spots.yml")) 
@@ -204,7 +228,6 @@ class Buchungsportal < Sinatra::Base
       spots = getSpotsFromDB()
       participants = getParticipantsFromDB()
       timestamps.each do | k,v |
-        puts "participants nil?=#{participants[k].nil?}"
         if checkSession(k) 
           if (spots.values.include?(k)) 
             if participants[k].nil?
@@ -212,6 +235,67 @@ class Buchungsportal < Sinatra::Base
               removeTimestamp(k)
             end
           end
+        end
+      end
+    end
+    def createCSV()
+      participants = getParticipantsFromDB()
+      CSV.generate do |csv|
+        csv << TableHeader
+        participants.keys.each do |k|
+          a = []
+          a.push(participants[k]["company"])
+          a.push(participants[k]["street"])
+          a.push(participants[k]["zip"])
+          a.push(participants[k]["city"])
+          if participants[k]["gender"] == "w"
+            a.push("Frau")
+          elsif participants[k]["gender"] == "m"
+            a.push("Herr")
+          else
+            a.push("-")
+          end
+          a.push(participants[k]["title"])
+          a.push(participants[k]["fname"])
+          a.push(participants[k]["lname"])
+          a.push(participants[k]["department"])
+          a.push(participants[k]["phone"])
+          a.push(participants[k]["fax"])
+          a.push(participants[k]["mail"])
+          if participants[k]["ugender"] == "w"
+            a.push("Frau")
+          elsif participants[k]["ugender"] == "m"
+            a.push("Herr")
+          else
+            a.push("-")
+          end
+          a.push(participants[k]["utitle"])
+          a.push(participants[k]["ufname"])
+          a.push(participants[k]["ulname"])
+          a.push(participants[k]["anz"])
+          a.push(participants[k]["lp"])
+          if participants[k]["booking"] == "on"
+            a.push("Ja")
+          else
+            a.push("Nein")
+          end
+          if participants[k]["pres"] == "on"
+            a.push("Ja")
+          else
+            a.push("Nein")
+          end
+          if participants[k]["elev"] == "on"
+            a.push("Ja")
+          else
+            a.push("Nein")
+          end
+          if participants[k]["inf"] == "on"
+            a.push("Ja")
+          else
+            a.push("Nein")
+          end
+          a.push(participants[k]["spotID"])
+          csv << a
         end
       end
     end
@@ -345,9 +429,7 @@ class Buchungsportal < Sinatra::Base
     data = session.to_h
     saveParticipant(data)
     @mail = session[:mail]
-    Spork.prefork do  
-      writeMail(["#{@mail}","#{ENV['MAIL1']}"], data)
-    end
+    writeMail(["#{@mail}","#{ENV['MAIL1']}"], data)
     invalidateSession()
     erb :success
   end
@@ -364,12 +446,47 @@ class Buchungsportal < Sinatra::Base
     if params["inputEmail"] == ENV['BUSERNAME'] && params["inputPassword"] == ENV['PASSWORD']
       session[:passwordhash] = ENV['PASSWORDHASH']
       redirect "backend"
-    elsif session[:passwordhash] = ENV['PASSWORDHASH']
+    elsif session[:passwordhash] == ENV['PASSWORDHASH']
       if (!params["deleteUser"].nil?)
         deletebooking(params["spotID"], params["userID"], params["userSessionID"])
         redirect "backend"
-      elsif (!params["details"].nil?)
+      elsif (params["detail"] == "on") 
         @params = params.to_h
+        @spots = getSpotsFromDB()
+        params["detail"] = nil
+        erb :detail
+      elsif (params["resend"] == "on")
+        params["mail"] = params["new-mail"]
+        params.delete("resend")
+        params.delete("detail")
+        params.delete("details")
+        params.delete("new-mail")
+        @params = params.to_h
+        saveParticipant(@params)
+        writeMail(["#{@params["mail"]}","#{ENV['MAIL1']}"], @params)
+        flash[:success] = "Bestätigungs-E-Mail erfolgreich erneut gesendet."
+        redirect "backend"
+      elsif (params["rebook"] == "on")
+        params.delete("resend")
+        params.delete("detail")
+        params.delete("details")
+        params.delete("new-mail")
+        params.delete("rebook")
+        @params = params.to_h
+        if !(params["nSpotID"] == params["spotID"])
+          @params["spotID"] = params["nSpotID"]
+          @params.delete("nSpotID")
+          removeMultiBookings(@params["sessionID"])
+          bookSpot(@params["spotID"], @params["sessionID"])
+          @params["booking"] = 'on'
+          if Spots[@params["spotID"]] == "c" && !(@params["lp"] == "comfortp")
+            @params["lp"] = 'comfort'
+          end
+        end
+        saveParticipant(@params)
+        @spots = getSpotsFromDB()
+        params["detail"] = nil
+        @msg = "Buchungsdetails erfolgreich geändert."
         erb :detail
       end
     end
@@ -391,5 +508,11 @@ class Buchungsportal < Sinatra::Base
       redirect "/login"
     end
   end
-
+  get '/csv' do
+    if session[:passwordhash] == ENV['PASSWORDHASH']
+      content_type 'application/csv'
+      attachment   "fkm-#{Time.now.strftime("%d-%m-%Y-%H-%M")}.csv"
+      createCSV()
+    end
+  end
 end

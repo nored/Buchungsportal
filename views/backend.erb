@@ -18,6 +18,7 @@
           <%= "<td>" %>
           <%= "<form method='post' action='/backend'>" %>
               <%= %Q(<button class="btn btn-info" type="submit" name='details' value="">Details</button>) %>
+              <%= %Q(<input type="text" class="form-control form-control-sm" id='detail' name='detail' value='on' hidden>) %>
               <%= k.map{|key, value| %Q(<input type="text" class="form-control form-control-sm" id='#{key}' name='#{key}' value='#{value}' hidden>)}.join("\n") %>
           <%= "</form>" %>
           <%= "</td>" %>
@@ -33,4 +34,6 @@
       <% end %>
     </tbody>
   </table>
+  <hr>
+  <a href="/csv" class="btn btn-primary mb-2" role="button">Download CSV</a>
 </div>

@@ -15,12 +15,10 @@
       <% if type.to_s == "error" %>
         <div data-alert class="alert alert-danger" role="alert">
           <%= flash[type] %>
-          <a href="#" class="close">&times;</a>
         </div>
       <% elsif type.to_s == "success" %>
         <div data-alert class="alert alert-success" role="alert">
           <%= flash[type] %>
-          <a href="#" class="close">&times;</a>
         </div>
       <% end %>
     <% end %>
