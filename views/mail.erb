@@ -2,6 +2,8 @@ Sehr <% if @params["gender"] == "m" %>geehrter Herr <%if (!@params["title"].nil?
 <br>
 vielen Dank für Ihre Anmeldung zur Firmenkontaktmesse 2019 der Technischen Hochschule Brandenburg am 06.06.2019. Sie haben im Frühbucher-Zeitraum gebucht:<br>
 <br>
+<%= @params["company"] %><br>
+<br>
 - Leistungspaket: <% if @params["lp"] == "basic" %>Basis<% elsif @params["lp"] == "comfort" %>Comfort<% else %>Comfort Plus<% end %> <% if @params["booking"] == "on" %>mit Stellplatzreservierung<% elsif @params["bookingincl"] == "on" %>incl. Stellplatzreservierung<% else %>ohne Stellplatzreservierung<% end %><br>
 <% if (!@params["spotID"].nil?) %>- Stellplatz: <%= @params["spotID"] %><br><% end %>
 <% if @params["pres"] == "on" %>- Werbeanzeige im Messekatalog<br><% end %>
