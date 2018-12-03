@@ -24,6 +24,19 @@
                 <table class="table table-sm">
                 <thead>
                     <tr>
+                    <th scope="col">Buchungsdatum:</th>
+                    <th>
+                        <div class="input-group date" >
+                            <input type="text" name="date" class="form-control form-control-sm" id="datepicker" value="<%if @params["date"].nil? %><%=@date%><% else %><%= @params["date"]%><%end%>" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="datepicker-addon"><i class="fas fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                    </th>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
                     <th scope="col">Angaben zur Firma:</th>
                     <th scope="col">&emsp;</th>
                     </tr>
@@ -246,4 +259,10 @@
         <input type="text" class="form-control form-control-sm" id='rebook' name='rebook' value='on' hidden>
         <button type="submit" class="btn btn-primary mb-2">Buchungsdetails Anpassen</button>
     </form>
+    <script>
+        $('#datepicker').datepicker({
+            language: 'de',
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
 <div>

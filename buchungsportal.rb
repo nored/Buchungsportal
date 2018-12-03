@@ -89,7 +89,8 @@ class Buchungsportal < Sinatra::Base
     "Werbeanzeige im Messekatalog",
     "Logo im Messekatalog",
     "Einladung in 2020",
-    "Stellplatz"
+    "Stellplatz",
+    "Buchungsdatum"
   ]
   helpers do
     def createDB()
@@ -238,8 +239,19 @@ class Buchungsportal < Sinatra::Base
         end
       end
     end
+    def getDate(params)
+      timestamps = getTimestamps()
+      datestr = params["date"].nil? ? timestamps[params["sessionID"]].to_s : params["date"]
+      if datestr.empty?
+        nil
+      else
+        date = Date.parse datestr
+        date.strftime("%d.%m.%Y")
+      end
+    end
     def createCSV()
       participants = getParticipantsFromDB()
+      params = {}
       CSV.generate do |csv|
         csv << TableHeader
         participants.keys.each do |k|
@@ -295,6 +307,9 @@ class Buchungsportal < Sinatra::Base
             a.push("Nein")
           end
           a.push(participants[k]["spotID"])
+          params["date"] = participants[k]["date"]
+          params["sessionID"] = participants[k]["sessionID"]
+          a.push(getDate(params))
           csv << a
         end
       end
@@ -452,6 +467,7 @@ class Buchungsportal < Sinatra::Base
         redirect "backend"
       elsif (params["detail"] == "on") 
         @params = params.to_h
+        @date = getDate(@params)
         @spots = getSpotsFromDB()
         params["detail"] = nil
         erb :detail
