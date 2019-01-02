@@ -1,9 +1,7 @@
 <div class="container">
     <legend >
             Bitte überprüfen Sie Ihre Angaben
-            <br>
-            <small class="red tiny"> **=Frühbucherpreise bis 31.12.2018</small>
-        </legend>
+    </legend>
     <div class="row tiny">
         <div class="col-sm-6">
             <table class="table table-sm">
@@ -114,7 +112,7 @@
                 <tr>
                 <td>Leistungspaket:</td>
                 <td><% if session[:lp] == "basic" %>"Basis"<% elsif session[:lp] == "comfort" %>"Comfort"<% else %>"Comfort Plus"<% end %></td>
-                <td><% if session[:lp] == "basic" %>620,00 EUR** statt 775,00 EUR<% elsif session[:lp] == "comfort" %>800,00 EUR** statt 1.000,00 EUR<% else %>1560,00 EUR** statt 1.950,00 EUR<% end %></td>
+                <td><% if session[:lp] == "basic" %>775,00 EUR<% elsif session[:lp] == "comfort" %>1.000,00 EUR<% else %>1.950,00 EUR<% end %></td>
                 </tr>
             </tbody>
             <thead>
@@ -128,17 +126,17 @@
                 <tr>
                 <td>Stellplatzreservierung:</td>
                 <td><% if session[:booking] == "on" %>Ja<% elsif session[:comfortp] == "on" %>Ja<% else %>Nein<% end %></td>
-                <td><% if session[:booking] == "on" %>175,00 EUR** statt 220,00 EUR<% elsif session[:comfortp] == "on" %>incl.<% else %>-<% end %></td>
+                <td><% if session[:booking] == "on" %>220,00 EUR<% elsif session[:comfortp] == "on" %>incl.<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Werbeanzeige im Messekatalog:</td>
                 <td><% if session[:pres] == "on" %>Ja<% else %>Nein<% end %></td>
-                <td><% if session[:pres] == "on" %>160,00 EUR** statt 200,00 EUR<% else %>-<% end %></td>
+                <td><% if session[:pres] == "on" %>200,00 EUR<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Logo im Messekatalog:</td>
                 <td><% if session[:elev] == "on" %>Ja<% else %>Nein<% end %></td>
-                <td><% if session[:elev] == "on" %>120,00 EUR** statt 150,00 EUR<% else %>-<% end %></td>
+                <td><% if session[:elev] == "on" %>150,00 EUR<% else %>-<% end %></td>
                 </tr>
                 <tr>
                 <td>Einladung in 2020:</td>
