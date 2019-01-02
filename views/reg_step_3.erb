@@ -11,16 +11,16 @@
                 <img class="background" src="/images/plan.jpg"/>
                 <% @spots.each do |id, stat| %>
                     <% if stat == "c" %>
-                        <button type="submit" name="spotID" value="<%= id %>" <% if session[:lp] == "basic" %><%= "disabled" %><% end %>><img title="Comfort" src="/images/comfort.png" class="img<%= id %>"</button> 
+                        <button type="submit" name="spotID" value="<%= id %>" <% if session[:lp] == "basic" %><%= "disabled" %><% end %> title="Comfort" class="scalable btn<%= id %>"> <img src="/images/comfort.png" class="scalable comfort btn<%= id %>"></button>
                     <% elsif stat == "d" %>
-                        <button type="submit" name="spotID" value="<%= id %>"><img title="Standard" src="/images/default.png" class="img<%= id %>"</button> 
+                        <button type="submit" name="spotID" value="<%= id %>" title="Standard" class="scalable btn<%= id %>"> <img src="/images/default.png" class="scalable default btn<%= id %>"></button>
                     <% else %>
-                        <button type="submit" name="spotID" value="<%= id %>" disabled><img title="Reserviert" src="/images/res.png" class="img<%= id %>"</button>
+                        <button type="submit" name="spotID" value="<%= id %>" disabled title="Reserviert" class="scalable btn<%= id %>"> <img src="/images/res.png" class="scalable res btn<%= id %>"></button>
                     <% end %>
                 <% end %>
         <% if (!params['spotID'].nil?) %>
                 </form>
-            <button type="submit" name="spotID" value="<%= params["spotID"] %>" disabled><img title="Reserviert" src="/images/res.png" class="img<%= params["spotID"] %>"</button>
+            <button type="submit" name="spotID" value="<%= params["spotID"] %>" disabled title="Reserviert" class="scalable btn<%= params["spotID"] %>"> <img src="/images/res.png" class="scalable res btn<%= params["spotID"] %>"></button>
             </div>
             <div class="col-sm-6 big-gap">
                 <div class="card">

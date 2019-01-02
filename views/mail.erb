@@ -1,6 +1,6 @@
 Sehr <% if @params["gender"] == "m" %>geehrter Herr <%if (!@params["title"].nil?) %><%= @params["title"] %> <% end %><%= @params["lname"]%><% elsif @params["gender"] == "w" %>geehrte Frau <%if (!@params["title"].nil?) %><%= @params["title"] %> <% end %><%= @params["lname"]%><% else %>geehrte Damen und Herren<% end %>,<br>
 <br>
-vielen Dank für Ihre Anmeldung zur Firmenkontaktmesse 2019 der Technischen Hochschule Brandenburg am 06.06.2019. Sie haben im Frühbucher-Zeitraum gebucht:<br>
+vielen Dank für Ihre Anmeldung zur Firmenkontaktmesse 2019 der Technischen Hochschule Brandenburg am 06.06.2019. Sie haben gebucht:<br>
 <br>
 <%= @params["company"] %><br>
 <br>
