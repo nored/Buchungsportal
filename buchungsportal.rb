@@ -90,7 +90,9 @@ class Buchungsportal < Sinatra::Base
     "Logo im Messekatalog",
     "Einladung in 2020",
     "Stellplatz",
-    "Buchungsdatum"
+    "Buchungsdatum",
+    "Zielgruppe",
+    "AGB"
   ]
   helpers do
     def createDB()
@@ -177,7 +179,7 @@ class Buchungsportal < Sinatra::Base
         Mail.deliver do
           to "#{m}"
           from "#{ENV['MAIL2']}"
-          subject "Buchungsbestätigung Firmenkontaktmesse 2019"
+          subject "Buchungsbestätigung Firmenkontaktmesse 2020"
           content_type 'text/html; charset=UTF-8'
           body "#{mail}"
         end
@@ -310,6 +312,36 @@ class Buchungsportal < Sinatra::Base
           params["date"] = participants[k]["date"]
           params["sessionID"] = participants[k]["sessionID"]
           a.push(getDate(params))
+          targetGroup = []
+          if participants[k]["Informatik"] == "on"
+            targetGroup.push("Informatik")
+          end
+          if participants[k]["Medieninformatik"] == "on"
+            targetGroup.push("Medieninformatik")
+          end
+          if participants[k]["Medizininformatik"] == "on"
+            targetGroup.push("Medizininformatik")
+          end
+          if participants[k]["Augenoptik"] == "on"
+            targetGroup.push("Augenoptik/Optische Gerätetechnik")
+          end
+          if participants[k]["Ingenieurwissenschaften"] == "on"
+            targetGroup.push("Ingenieurwissenschaften")
+          end
+          if participants[k]["Maschinenbau"] == "on"
+            targetGroup.push("Maschinenbau")
+          end
+          if participants[k]["Wirtschaftsingenieurwesen"] == "on"
+            targetGroup.push("Wirtschaftsingenieurwesen")
+          end
+          if participants[k]["Betriebswirtschaftslehre"] == "on"
+            targetGroup.push("Betriebswirtschaftslehre")
+          end
+          if participants[k]["Wirtschaftsinformatik"] == "on"
+            targetGroup.push("Wirtschaftsinformatik")
+          end
+          a.push("#{targetGroup.join(", ")}")
+          a.push(participants[k]["agb"])
           csv << a
         end
       end
@@ -427,7 +459,16 @@ class Buchungsportal < Sinatra::Base
       session[:utitle] = params['utitle']
       session[:ufname] = params['ufname']
       session[:ulname] = params['ulname']
-      session[:anz] = params['anz']    
+      session[:anz] = params['anz']
+      session[:Informatik] = params['Informatik']
+      session[:Medieninformatik] = params['Medieninformatik']
+      session[:Medizininformatik] = params['Medizininformatik']
+      session[:Augenoptik] = params['Augenoptik']
+      session[:Ingenieurwissenschaften] = params['Ingenieurwissenschaften']
+      session[:Maschinenbau] = params['Maschinenbau']
+      session[:Wirtschaftsingenieurwesen] = params['Wirtschaftsingenieurwesen']
+      session[:Betriebswirtschaftslehre] = params['Betriebswirtschaftslehre']
+      session[:Wirtschaftsinformatik] = params['Wirtschaftsinformatik']
       redirect "evaluate"
     end
   end
@@ -441,6 +482,7 @@ class Buchungsportal < Sinatra::Base
   end
 
   post '/success' do
+    session[:agb] = params['agb-box']
     data = session.to_h
     saveParticipant(data)
     @mail = session[:mail]
@@ -530,5 +572,10 @@ class Buchungsportal < Sinatra::Base
       attachment   "fkm-#{Time.now.strftime("%d-%m-%Y-%H-%M")}.csv"
       createCSV()
     end
+  end
+  get '/download/:path/:file' do |path, file|
+    file = File.join('./uploads/', path, file)
+    puts file.inspect
+    send_file(file, :disposition => 'attachment', :filename => File.basename(file))
   end
 end

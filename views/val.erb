@@ -159,10 +159,27 @@
             </table>
         </div>
     </div>
-    <hr>
-    <form action='success' method='post'>
-        <a href="/step_four" class="btn btn-danger" role="button">Zurück</a>
-        <button type="submit" class="btn btn-success">Verbindlich Buchen</button>
-    </form>
+    <br>
+    <div class="card">
+      <div class="card-header">
+        Für die Buchung gelten die AGB der Technischen Hochschule Brandenburg.
+      </div>
+      <div class="card-body">
+        <form action='success' method='post' class="needs-validation" novalidate>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" name="agb-box" id="agb" value="<%=Time.now.strftime("%d-%m-%Y-%H-%M")%>" required>
+                <label class="form-label" for="agb-box">
+                    Ich habe die <a href="<%=ENV['URL']%>/download/agb/THB-AGB-FKM2020.pdf">AGB</a> der Technischen Hochschule Brandenburg gelesen und bin mit deren Geltung einverstanden.
+                </label>
+                <div class="invalid-feedback">
+                    Bitte bestätigen Sie, dass Sie die AGB der Technischen Hochschule Brandenburg gelesen haben und mit deren Geltung einverstanden sind.
+                </div>
+            </div>
+            <a href="/step_four" class="btn btn-danger" role="button">Zurück</a>
+            <button type="submit" class="btn btn-success">Verbindlich Buchen</button>
+        </form>
+      </div>
+    </div>
+    <br>
 <div>
 

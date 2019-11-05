@@ -1,0 +1,204 @@
+I, [2019-01-02T18:57:49.443218 #1962]  INFO -- : listening on addr=/home/buchungsportal/Buchungsportal/tmp/sockets/unicorn.sock fd=11
+I, [2019-01-02T18:57:49.443678 #1962]  INFO -- : worker=0 spawning...
+I, [2019-01-02T18:57:49.468905 #1965]  INFO -- : worker=0 spawned pid=1965
+I, [2019-01-02T18:57:49.469868 #1965]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.510607 #1962]  INFO -- : worker=1 spawning...
+I, [2019-01-02T18:57:49.512423 #1968]  INFO -- : worker=1 spawned pid=1968
+I, [2019-01-02T18:57:49.512686 #1968]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.517539 #1962]  INFO -- : worker=2 spawning...
+I, [2019-01-02T18:57:49.518666 #1962]  INFO -- : worker=3 spawning...
+I, [2019-01-02T18:57:49.564041 #1971]  INFO -- : worker=2 spawned pid=1971
+I, [2019-01-02T18:57:49.564418 #1971]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.550392 #1962]  INFO -- : worker=4 spawning...
+I, [2019-01-02T18:57:49.585966 #1974]  INFO -- : worker=3 spawned pid=1974
+I, [2019-01-02T18:57:49.586239 #1974]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.616721 #1977]  INFO -- : worker=4 spawned pid=1977
+I, [2019-01-02T18:57:49.616993 #1977]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.624321 #1962]  INFO -- : worker=5 spawning...
+I, [2019-01-02T18:57:49.625045 #1962]  INFO -- : worker=6 spawning...
+I, [2019-01-02T18:57:49.636199 #1980]  INFO -- : worker=5 spawned pid=1980
+I, [2019-01-02T18:57:49.636517 #1980]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.682735 #1962]  INFO -- : worker=7 spawning...
+I, [2019-01-02T18:57:49.721530 #1983]  INFO -- : worker=6 spawned pid=1983
+I, [2019-01-02T18:57:49.721814 #1983]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:49.731392 #1962]  INFO -- : master process ready
+I, [2019-01-02T18:57:49.877575 #1986]  INFO -- : worker=7 spawned pid=1986
+I, [2019-01-02T18:57:49.877894 #1986]  INFO -- : Refreshing Gem list
+I, [2019-01-02T18:57:51.653982 #1965]  INFO -- : worker=0 ready
+I, [2019-01-02T18:57:51.674076 #1971]  INFO -- : worker=2 ready
+I, [2019-01-02T18:57:51.675842 #1974]  INFO -- : worker=3 ready
+I, [2019-01-02T18:57:51.678757 #1983]  INFO -- : worker=6 ready
+I, [2019-01-02T18:57:51.680121 #1968]  INFO -- : worker=1 ready
+I, [2019-01-02T18:57:51.684425 #1977]  INFO -- : worker=4 ready
+I, [2019-01-02T18:57:51.704242 #1986]  INFO -- : worker=7 ready
+I, [2019-01-02T18:57:51.708785 #1980]  INFO -- : worker=5 ready
+I, [2019-01-02T19:18:31.673001 #1962]  INFO -- : reaped #<Process::Status: pid 1965 exit 0> worker=0
+I, [2019-01-02T19:18:31.673127 #1962]  INFO -- : reaped #<Process::Status: pid 1968 exit 0> worker=1
+I, [2019-01-02T19:18:31.673162 #1962]  INFO -- : reaped #<Process::Status: pid 1971 exit 0> worker=2
+I, [2019-01-02T19:18:31.673192 #1962]  INFO -- : reaped #<Process::Status: pid 1974 exit 0> worker=3
+I, [2019-01-02T19:18:31.673272 #1962]  INFO -- : reaped #<Process::Status: pid 1977 exit 0> worker=4
+I, [2019-01-02T19:18:31.673298 #1962]  INFO -- : reaped #<Process::Status: pid 1980 exit 0> worker=5
+I, [2019-01-02T19:18:31.673323 #1962]  INFO -- : reaped #<Process::Status: pid 1983 exit 0> worker=6
+I, [2019-01-02T19:18:31.673347 #1962]  INFO -- : reaped #<Process::Status: pid 1986 exit 0> worker=7
+I, [2019-01-02T19:18:31.673395 #1962]  INFO -- : master complete
+I, [2019-01-02T19:18:45.121248 #2396]  INFO -- : unlinking existing socket=/home/buchungsportal/Buchungsportal/tmp/sockets/unicorn.sock
+I, [2019-01-02T19:18:45.121747 #2396]  INFO -- : listening on addr=/home/buchungsportal/Buchungsportal/tmp/sockets/unicorn.sock fd=11
+I, [2019-01-02T19:18:45.121892 #2396]  INFO -- : worker=0 spawning...
+I, [2019-01-02T19:18:45.122891 #2396]  INFO -- : worker=1 spawning...
+I, [2019-01-02T19:18:45.123795 #2396]  INFO -- : worker=2 spawning...
+I, [2019-01-02T19:18:45.123743 #2399]  INFO -- : worker=0 spawned pid=2399
+I, [2019-01-02T19:18:45.123984 #2399]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.124541 #2402]  INFO -- : worker=1 spawned pid=2402
+I, [2019-01-02T19:18:45.124616 #2396]  INFO -- : worker=3 spawning...
+I, [2019-01-02T19:18:45.124734 #2402]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.125487 #2405]  INFO -- : worker=2 spawned pid=2405
+I, [2019-01-02T19:18:45.125650 #2405]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.129192 #2396]  INFO -- : worker=4 spawning...
+I, [2019-01-02T19:18:45.131532 #2408]  INFO -- : worker=3 spawned pid=2408
+I, [2019-01-02T19:18:45.131760 #2408]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.137054 #2396]  INFO -- : worker=5 spawning...
+I, [2019-01-02T19:18:45.145166 #2396]  INFO -- : worker=6 spawning...
+I, [2019-01-02T19:18:45.145146 #2411]  INFO -- : worker=4 spawned pid=2411
+I, [2019-01-02T19:18:45.145393 #2411]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.149215 #2414]  INFO -- : worker=5 spawned pid=2414
+I, [2019-01-02T19:18:45.149442 #2414]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.161372 #2396]  INFO -- : worker=7 spawning...
+I, [2019-01-02T19:18:45.167913 #2396]  INFO -- : master process ready
+I, [2019-01-02T19:18:45.179393 #2417]  INFO -- : worker=6 spawned pid=2417
+I, [2019-01-02T19:18:45.179567 #2417]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.193092 #2419]  INFO -- : worker=7 spawned pid=2419
+I, [2019-01-02T19:18:45.193314 #2419]  INFO -- : Refreshing Gem list
+I, [2019-01-02T19:18:45.668081 #2405]  INFO -- : worker=2 ready
+I, [2019-01-02T19:18:45.699522 #2399]  INFO -- : worker=0 ready
+I, [2019-01-02T19:18:45.711361 #2408]  INFO -- : worker=3 ready
+I, [2019-01-02T19:18:45.715756 #2411]  INFO -- : worker=4 ready
+I, [2019-01-02T19:18:45.728561 #2419]  INFO -- : worker=7 ready
+I, [2019-01-02T19:18:45.747421 #2414]  INFO -- : worker=5 ready
+I, [2019-01-02T19:18:45.755975 #2402]  INFO -- : worker=1 ready
+I, [2019-01-02T19:18:45.785249 #2417]  INFO -- : worker=6 ready
+D, [2019-01-09T09:36:18.781300 #2396] DEBUG -- : waiting 16.0s after suspend/hibernation
+E, [2019-02-18T00:00:44.088766 #2396] ERROR -- : worker=7 PID:2419 timeout (31s > 30s), killing
+E, [2019-02-18T00:00:44.558415 #2396] ERROR -- : reaped #<Process::Status: pid 2419 SIGKILL (signal 9)> worker=7
+I, [2019-02-18T00:00:44.572773 #2396]  INFO -- : worker=7 spawning...
+I, [2019-02-18T00:00:45.029574 #21332]  INFO -- : worker=7 spawned pid=21332
+I, [2019-02-18T00:00:45.038095 #21332]  INFO -- : Refreshing Gem list
+I, [2019-02-18T00:00:48.581098 #21332]  INFO -- : worker=7 ready
+E, [2019-02-18T00:00:55.709546 #2396] ERROR -- : worker=5 PID:2414 timeout (31s > 30s), killing
+E, [2019-02-18T00:00:55.746502 #2396] ERROR -- : reaped #<Process::Status: pid 2414 SIGKILL (signal 9)> worker=5
+I, [2019-02-18T00:00:55.746700 #2396]  INFO -- : worker=5 spawning...
+I, [2019-02-18T00:00:55.855151 #21339]  INFO -- : worker=5 spawned pid=21339
+I, [2019-02-18T00:00:55.855440 #21339]  INFO -- : Refreshing Gem list
+I, [2019-02-18T00:00:56.126682 #21339]  INFO -- : worker=5 ready
+E, [2019-02-18T00:00:57.752285 #2396] ERROR -- : worker=1 PID:2402 timeout (31s > 30s), killing
+E, [2019-02-18T00:00:57.752464 #2396] ERROR -- : worker=4 PID:2411 timeout (31s > 30s), killing
+E, [2019-02-18T00:00:57.752509 #2396] ERROR -- : worker=6 PID:2417 timeout (31s > 30s), killing
+E, [2019-02-18T00:00:57.842112 #2396] ERROR -- : reaped #<Process::Status: pid 2402 SIGKILL (signal 9)> worker=1
+E, [2019-02-18T00:00:57.842262 #2396] ERROR -- : worker=4 PID:2411 timeout (32s > 30s), killing
+E, [2019-02-18T00:00:57.842300 #2396] ERROR -- : worker=6 PID:2417 timeout (32s > 30s), killing
+I, [2019-02-18T00:00:57.842361 #2396]  INFO -- : worker=1 spawning...
+I, [2019-02-18T00:00:57.972253 #21342]  INFO -- : worker=1 spawned pid=21342
+I, [2019-02-18T00:00:57.972543 #21342]  INFO -- : Refreshing Gem list
+I, [2019-02-18T00:00:58.699205 #21342]  INFO -- : worker=1 ready
+E, [2019-02-18T00:00:58.699634 #2396] ERROR -- : reaped #<Process::Status: pid 2411 SIGKILL (signal 9)> worker=4
+E, [2019-02-18T00:00:58.699815 #2396] ERROR -- : reaped #<Process::Status: pid 2417 SIGKILL (signal 9)> worker=6
+I, [2019-02-18T00:00:58.699918 #2396]  INFO -- : worker=4 spawning...
+I, [2019-02-18T00:00:58.728118 #2396]  INFO -- : worker=6 spawning...
+I, [2019-02-18T00:00:58.735423 #21345]  INFO -- : worker=4 spawned pid=21345
+I, [2019-02-18T00:00:58.735822 #21345]  INFO -- : Refreshing Gem list
+I, [2019-02-18T00:00:59.143098 #21345]  INFO -- : worker=4 ready
+I, [2019-02-18T00:00:59.218122 #21348]  INFO -- : worker=6 spawned pid=21348
+I, [2019-02-18T00:00:59.218457 #21348]  INFO -- : Refreshing Gem list
+I, [2019-02-18T00:00:59.765342 #21348]  INFO -- : worker=6 ready
+E, [2019-03-04T00:00:24.552579 #2396] ERROR -- : worker=5 PID:21339 timeout (31s > 30s), killing
+E, [2019-03-04T00:00:25.570971 #2396] ERROR -- : worker=5 PID:21339 timeout (32s > 30s), killing
+E, [2019-03-04T00:00:26.572249 #2396] ERROR -- : worker=5 PID:21339 timeout (33s > 30s), killing
+E, [2019-03-04T00:00:27.346698 #2396] ERROR -- : reaped #<Process::Status: pid 21339 SIGKILL (signal 9)> worker=5
+I, [2019-03-04T00:00:27.347078 #2396]  INFO -- : worker=5 spawning...
+I, [2019-03-04T00:00:28.030893 #13057]  INFO -- : worker=5 spawned pid=13057
+I, [2019-03-04T00:00:28.031339 #13057]  INFO -- : Refreshing Gem list
+I, [2019-03-04T00:00:29.547582 #13057]  INFO -- : worker=5 ready
+E, [2019-03-19T09:36:18.983936 #2396] ERROR -- : worker=7 PID:21332 timeout (31s > 30s), killing
+E, [2019-03-19T09:36:20.175074 #2396] ERROR -- : worker=7 PID:21332 timeout (32s > 30s), killing
+E, [2019-03-19T09:36:20.623836 #2396] ERROR -- : reaped #<Process::Status: pid 21332 SIGKILL (signal 9)> worker=7
+I, [2019-03-19T09:36:20.635413 #2396]  INFO -- : worker=7 spawning...
+I, [2019-03-19T09:36:21.264509 #26123]  INFO -- : worker=7 spawned pid=26123
+I, [2019-03-19T09:36:21.306759 #26123]  INFO -- : Refreshing Gem list
+I, [2019-03-19T09:36:27.574243 #26123]  INFO -- : worker=7 ready
+E, [2019-03-19T14:37:25.173761 #2396] ERROR -- : worker=4 PID:21345 timeout (31s > 30s), killing
+E, [2019-03-19T14:37:25.663652 #2396] ERROR -- : reaped #<Process::Status: pid 21345 SIGKILL (signal 9)> worker=4
+I, [2019-03-19T14:37:25.664063 #2396]  INFO -- : worker=4 spawning...
+I, [2019-03-19T14:37:26.023170 #30378]  INFO -- : worker=4 spawned pid=30378
+I, [2019-03-19T14:37:26.023536 #30378]  INFO -- : Refreshing Gem list
+I, [2019-03-19T14:37:27.554766 #30378]  INFO -- : worker=4 ready
+E, [2019-03-19T14:37:29.693519 #2396] ERROR -- : worker=1 PID:21342 timeout (31s > 30s), killing
+E, [2019-03-19T14:37:29.746282 #2396] ERROR -- : worker=5 PID:13057 timeout (31s > 30s), killing
+E, [2019-03-19T14:37:29.908605 #2396] ERROR -- : reaped #<Process::Status: pid 13057 SIGKILL (signal 9)> worker=5
+E, [2019-03-19T14:37:29.908743 #2396] ERROR -- : worker=1 PID:21342 timeout (32s > 30s), killing
+I, [2019-03-19T14:37:29.908839 #2396]  INFO -- : worker=5 spawning...
+I, [2019-03-19T14:37:30.059718 #30381]  INFO -- : worker=5 spawned pid=30381
+I, [2019-03-19T14:37:30.060002 #30381]  INFO -- : Refreshing Gem list
+E, [2019-03-19T14:37:30.116090 #2396] ERROR -- : reaped #<Process::Status: pid 21342 SIGKILL (signal 9)> worker=1
+I, [2019-03-19T14:37:30.116289 #2396]  INFO -- : worker=1 spawning...
+I, [2019-03-19T14:37:30.194107 #30385]  INFO -- : worker=1 spawned pid=30385
+I, [2019-03-19T14:37:30.194394 #30385]  INFO -- : Refreshing Gem list
+I, [2019-03-19T14:37:31.170604 #30381]  INFO -- : worker=5 ready
+I, [2019-03-19T14:37:31.600654 #30385]  INFO -- : worker=1 ready
+E, [2019-03-19T14:37:35.130707 #2396] ERROR -- : worker=3 PID:2408 timeout (31s > 30s), killing
+E, [2019-03-19T14:37:35.415071 #2396] ERROR -- : reaped #<Process::Status: pid 2408 SIGKILL (signal 9)> worker=3
+I, [2019-03-19T14:37:35.415288 #2396]  INFO -- : worker=3 spawning...
+I, [2019-03-19T14:38:10.994476 #30389]  INFO -- : worker=3 spawned pid=30389
+I, [2019-03-19T14:38:10.994850 #30389]  INFO -- : Refreshing Gem list
+I, [2019-03-19T14:38:14.888930 #30389]  INFO -- : worker=3 ready
+I, [2019-03-22T06:38:35.919675 #2396]  INFO -- : reaped #<Process::Status: pid 30378 exit 0> worker=4
+I, [2019-03-22T06:38:35.933856 #2396]  INFO -- : reaped #<Process::Status: pid 30381 exit 0> worker=5
+I, [2019-03-22T06:38:35.933929 #2396]  INFO -- : reaped #<Process::Status: pid 30385 exit 0> worker=1
+I, [2019-03-22T06:38:36.034356 #2396]  INFO -- : reaped #<Process::Status: pid 30389 exit 0> worker=3
+I, [2019-03-22T06:38:36.141451 #2396]  INFO -- : reaped #<Process::Status: pid 26123 exit 0> worker=7
+I, [2019-03-22T06:38:36.241999 #2396]  INFO -- : reaped #<Process::Status: pid 2399 exit 0> worker=0
+I, [2019-03-22T06:38:36.242179 #2396]  INFO -- : reaped #<Process::Status: pid 21348 exit 0> worker=6
+I, [2019-03-22T06:38:37.145457 #2396]  INFO -- : reaped #<Process::Status: pid 2405 exit 0> worker=2
+I, [2019-03-22T06:38:37.145782 #2396]  INFO -- : master complete
+I, [2019-05-23T14:21:02.517777 #28999]  INFO -- : unlinking existing socket=/home/buchungsportal/Buchungsportal/tmp/sockets/unicorn.sock
+I, [2019-05-23T14:21:02.632683 #28999]  INFO -- : listening on addr=/home/buchungsportal/Buchungsportal/tmp/sockets/unicorn.sock fd=11
+I, [2019-05-23T14:21:02.680712 #28999]  INFO -- : worker=0 spawning...
+I, [2019-05-23T14:21:02.682954 #29003]  INFO -- : worker=0 spawned pid=29003
+I, [2019-05-23T14:21:02.683339 #29003]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:02.719828 #28999]  INFO -- : worker=1 spawning...
+I, [2019-05-23T14:21:03.080504 #28999]  INFO -- : worker=2 spawning...
+I, [2019-05-23T14:21:03.257577 #29006]  INFO -- : worker=1 spawned pid=29006
+I, [2019-05-23T14:21:03.257950 #29006]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:03.421207 #28999]  INFO -- : worker=3 spawning...
+I, [2019-05-23T14:21:03.654771 #29009]  INFO -- : worker=2 spawned pid=29009
+I, [2019-05-23T14:21:03.741293 #29009]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:04.019539 #28999]  INFO -- : worker=4 spawning...
+I, [2019-05-23T14:21:04.358591 #29012]  INFO -- : worker=3 spawned pid=29012
+I, [2019-05-23T14:21:04.601494 #28999]  INFO -- : worker=5 spawning...
+I, [2019-05-23T14:21:04.690384 #29012]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:05.083221 #29015]  INFO -- : worker=4 spawned pid=29015
+I, [2019-05-23T14:21:05.451139 #29015]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:05.661472 #28999]  INFO -- : worker=6 spawning...
+I, [2019-05-23T14:21:05.948974 #29018]  INFO -- : worker=5 spawned pid=29018
+I, [2019-05-23T14:21:06.125499 #29018]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:06.121612 #28999]  INFO -- : worker=7 spawning...
+I, [2019-05-23T14:21:06.596622 #29021]  INFO -- : worker=6 spawned pid=29021
+I, [2019-05-23T14:21:06.584236 #28999]  INFO -- : master process ready
+I, [2019-05-23T14:21:06.761258 #29021]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:07.186147 #29024]  INFO -- : worker=7 spawned pid=29024
+I, [2019-05-23T14:21:07.350678 #29024]  INFO -- : Refreshing Gem list
+I, [2019-05-23T14:21:14.561557 #29021]  INFO -- : worker=6 ready
+I, [2019-05-23T14:21:14.562525 #29024]  INFO -- : worker=7 ready
+I, [2019-05-23T14:21:14.562562 #29015]  INFO -- : worker=4 ready
+I, [2019-05-23T14:21:14.570795 #29009]  INFO -- : worker=2 ready
+I, [2019-05-23T14:21:14.585507 #29006]  INFO -- : worker=1 ready
+I, [2019-05-23T14:21:14.596321 #29003]  INFO -- : worker=0 ready
+I, [2019-05-23T14:21:14.607703 #29018]  INFO -- : worker=5 ready
+I, [2019-05-23T14:21:14.706185 #29012]  INFO -- : worker=3 ready
+I, [2019-07-24T12:11:02.507262 #28999]  INFO -- : reaped #<Process::Status: pid 29003 exit 0> worker=0
+I, [2019-07-24T12:11:02.507993 #28999]  INFO -- : reaped #<Process::Status: pid 29006 exit 0> worker=1
+I, [2019-07-24T12:11:02.508185 #28999]  INFO -- : reaped #<Process::Status: pid 29009 exit 0> worker=2
+I, [2019-07-24T12:11:02.508297 #28999]  INFO -- : reaped #<Process::Status: pid 29012 exit 0> worker=3
+I, [2019-07-24T12:11:02.508385 #28999]  INFO -- : reaped #<Process::Status: pid 29015 exit 0> worker=4
+I, [2019-07-24T12:11:02.508454 #28999]  INFO -- : reaped #<Process::Status: pid 29018 exit 0> worker=5
+I, [2019-07-24T12:11:02.508531 #28999]  INFO -- : reaped #<Process::Status: pid 29021 exit 0> worker=6
+I, [2019-07-24T12:11:02.508600 #28999]  INFO -- : reaped #<Process::Status: pid 29024 exit 0> worker=7
+I, [2019-07-24T12:11:02.508895 #28999]  INFO -- : master complete

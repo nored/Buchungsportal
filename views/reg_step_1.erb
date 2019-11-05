@@ -2,13 +2,17 @@
     <form action='validate_step_one' method='post' class="needs-validation" novalidate>
         <legend >
             Teilnahme und Leistungspakete
+            <br>
+            <small class="red"> ** Frühbucherpreise bis 31.12.2018</small>
         </legend>
         <hr>
         <fieldset class="form-group">
             <div class="row">
                 <legend class="col-form-label col-sm-2 pt-0">
                     <h6>Basispaket</h6>
-                    <strong class="pricePackage red small">775,00 EUR</strong>
+                    <strong class="pricePackage red small">640,00 EUR**</strong>
+                    <br>
+                    <small class="tiny">statt 800,00 EUR</small>
                 </legend>
                 <div class="col-sm-10">
                     <div class="form-check">
@@ -26,10 +30,12 @@
                 </div>
             </div>
             <hr>
-            <div class="row">        
+            <div class="row">
                 <legend class="col-form-label col-sm-2 pt-0">
                     <h6>Comfort</h6>
-                    <strong class="pricePackage red small">1000,00 EUR</strong>
+                    <strong class="pricePackage red small">800,00 EUR**</strong>
+                    <br>
+                    <small class="tiny">statt 1.000,00 EUR</small>
                 </legend>
                 <div class="col-sm-10">
                     <div class="form-check">
@@ -41,30 +47,6 @@
                                 <li>"Stellenticket" plus je 1 Freiticket für Studierende- und Absolventenstellen</li>
                                 <li>THB-Jobwall: Bis zu 5 Aushänge am Messetag</li>
                                 <li>Messekatalog: Ganzseitige Firmenpräsentation</li>
-                                <li>Catering und individuelle Betreuung am Messetag</li>
-                            </ul>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">
-                    <h6>Comfort Plus</h6>
-                    <strong class="pricePackage red small">1.950,00 EUR</strong>
-                </legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lp" id="comfortp" value="comfortp" <% if session[:lp] == 'comfortp' %>checked<%end%> required>
-                        <label class="form-check-label" for="comfortp">
-                            <ul class="col-md-8 description">
-                                <li>Standfläche: 12 qm (3 x 4 m) inkl. Strom</li>
-                                <li>THB-Jobbörse: Kostenfreies Unternehmensprofil im Stellenportal</li>
-                                <li>"Stellenticket" plus je 2 Freitickets für Studierende- und Absolventenstellen</li>
-                                <li>THB-Jobwall: Bis zu 5 Aushänge am Messetag</li>
-                                <li>Messekatalog: Ganzseitige Firmenpräsentation und Logo im Messe-Stellplan</li>
-                                <li>Firmenpräsentation über Slideshow während der Firmenkontaktmesse (Leinwand Ausstellungsraum, Monitor Foyer)</li>
-                                <li>Stellplatzreservierung insklusive (First-Come-First-Serve-Prinzip)</li>
                                 <li>Catering und individuelle Betreuung am Messetag</li>
                             </ul>
                         </label>
