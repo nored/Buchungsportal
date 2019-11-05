@@ -477,6 +477,35 @@ class Buchungsportal < Sinatra::Base
     if checkSession(session[:sessionID])
       redirect "invalid_session"
     else
+      targetGroup = []
+      if session[:Informatik] == "on"
+        targetGroup.push("Informatik")
+      end
+      if session[:Medieninformatik] == "on"
+        targetGroup.push("Medieninformatik")
+      end
+      if session[:Medizininformatik] == "on"
+        targetGroup.push("Medizininformatik")
+      end
+      if session[:Augenoptik] == "on"
+        targetGroup.push("Augenoptik/Optische Gerätetechnik")
+      end
+      if session[:Ingenieurwissenschaften] == "on"
+        targetGroup.push("Ingenieurwissenschaften")
+      end
+      if session[:Maschinenbau] == "on"
+        targetGroup.push("Maschinenbau")
+      end
+      if session[:Wirtschaftsingenieurwesen] == "on"
+        targetGroup.push("Wirtschaftsingenieurwesen")
+      end
+      if session[:Betriebswirtschaftslehre] == "on"
+        targetGroup.push("Betriebswirtschaftslehre")
+      end
+      if session[:Wirtschaftsinformatik] == "on"
+        targetGroup.push("Wirtschaftsinformatik")
+      end
+      @TargetGroup = ("#{targetGroup.join(", ")}")
       erb :val
     end
   end
@@ -509,6 +538,35 @@ class Buchungsportal < Sinatra::Base
         redirect "backend"
       elsif (params["detail"] == "on") 
         @params = params.to_h
+        targetGroup = []
+        if @params["Informatik"] == "on"
+          targetGroup.push("Informatik")
+        end
+        if @params["Medieninformatik"] == "on"
+          targetGroup.push("Medieninformatik")
+        end
+        if @params["Medizininformatik"] == "on"
+          targetGroup.push("Medizininformatik")
+        end
+        if @params["Augenoptik"] == "on"
+          targetGroup.push("Augenoptik/Optische Gerätetechnik")
+        end
+        if @params["Ingenieurwissenschaften"] == "on"
+          targetGroup.push("Ingenieurwissenschaften")
+        end
+        if @params["Maschinenbau"] == "on"
+          targetGroup.push("Maschinenbau")
+        end
+        if @params["Wirtschaftsingenieurwesen"] == "on"
+          targetGroup.push("Wirtschaftsingenieurwesen")
+        end
+        if @params["Betriebswirtschaftslehre"] == "on"
+          targetGroup.push("Betriebswirtschaftslehre")
+        end
+        if @params["Wirtschaftsinformatik"] == "on"
+          targetGroup.push("Wirtschaftsinformatik")
+        end
+        @TargetGroup = ("#{targetGroup.join(", ")}")
         @date = getDate(@params)
         @spots = getSpotsFromDB()
         params["detail"] = nil
@@ -531,7 +589,8 @@ class Buchungsportal < Sinatra::Base
         params.delete("new-mail")
         params.delete("rebook")
         @params = params.to_h
-        if !(params["nSpotID"] == params["spotID"])
+        if !(params["nSpotID"] == params["spotID"]) && !(params["nSpotID"] == "-")
+          puts "true"
           @params["spotID"] = params["nSpotID"]
           @params.delete("nSpotID")
           removeMultiBookings(@params["sessionID"])
