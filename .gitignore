@@ -1,1 +1,4 @@
 spots.yml
+./log
+./tmp
+Gemfile.lock
