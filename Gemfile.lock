@@ -39,7 +39,7 @@ GEM
     openssl (2.1.0)
     power_assert (1.1.1)
     psych (3.0.2)
-    rack (2.0.6)
+    rack (2.0.8)
     rack-protection (2.0.4)
       rack
     raindrops (0.19.0)
@@ -125,7 +125,7 @@ DEPENDENCIES
   openssl (= 2.1.0)
   power_assert (= 1.1.1)
   psych (= 3.0.2)
-  rack (= 2.0.6)
+  rack (= 2.0.8)
   rack-protection (= 2.0.4)
   raindrops (= 0.19.0)
   rake (= 12.3.0)
