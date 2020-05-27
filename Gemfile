@@ -1,5 +1,5 @@
 source :rubygems
-gem "activesupport", "5.2.1"
+gem "activesupport", "5.2.4.3"
 gem "backports", "3.11.4"
 gem "bigdecimal", "1.3.4"
 gem "bundler-unload", "1.0.2"
